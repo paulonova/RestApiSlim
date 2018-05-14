@@ -17,15 +17,15 @@
 
     
 <!-- Alert login error Dialog -->
-<?php if(isset($_SESSION["message"])):?>
+<?php if(isset($_GET["message"])):?>
         
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
             <?php 
-                echo $_SESSION["message"];
-                unset($_SESSION["message"]);
+                echo $_GET["message"];
+                unset($_GET["message"]);
             ?>
         </div> 
 
