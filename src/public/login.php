@@ -1,8 +1,6 @@
 <?php
 session_start();
 
-echo "Eu sou: " . $_POST["username"] . " - Pass: " . $_POST["password"];
-
 $pdo = new PDO(
     "mysql:host=localhost;dbname=db_blog;charset=utf8",
     "root",  //username
@@ -21,7 +19,7 @@ $statement->execute([
 $user = $statement->fetch();
 
 if(password_verify($_POST["password"], $user["password"])){
-    header('Location: ../index.php?message=login done');
+    header('Location: ../index.php');
 
     $_SESSION["message"] = "login done";
     $_SESSION["loggedIn"] = true;

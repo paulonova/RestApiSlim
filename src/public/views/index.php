@@ -1,3 +1,6 @@
+<?php session_start();?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,7 +59,28 @@
 
 <?php if (isset($_SESSION["loggedIn"])): ?>
 
-    <h1>You are inlogad</h1>
+    <h1>Welcome <?php echo $_SESSION["username"]?></h1>
+    <hr>
+
+    
+    <ul class="list-group">
+    
+        <li class="list-group-item list-group-item-success"><h2>API Links</h2></li>
+        <li class="list-group-item">Hämta ut de 20 senaste inläggen via GET /api/entries.</li>
+        <li class="list-group-item">skapa ett inlägg via POST /api/entries.</li>
+        <li class="list-group-item">hämta ut ett enskilt specifikt inlägg via GET /api/entries/{ID}.</li>
+        <li class="list-group-item">ta bort ett enskilt specifikt inlägg via DELETE /api/entries/{ID}.</li>
+        <li class="list-group-item">uppdatera ett enskilt specifikt inlägg via PATCH /api/entries/{ID}.</li>
+        <li class="list-group-item">hämta alla inlägg som en användare har skrivit via en endpoint.</li>
+        <li class="list-group-item">hämta de 20 senaste kommentarerna via GET /api/comments.</li>
+        <li class="list-group-item">skapa en kommentar via POST /api/comments</li>
+        <li class="list-group-item">hämta ut en enskild specifik kommentar via GET /api/comments/{ID}</li>
+        <li class="list-group-item">ta bort en enskild specifik kommentar via DELETE /api/comments/{ID}</li>
+        <li class="list-group-item">hämta alla kommentarer kopplat till ett inlägg via en endpoint.</li>
+        <li class="list-group-item">hämta alla användare via GET /api/users.</li>
+        <li class="list-group-item">skapa en användare via POST /register.</li>
+        <li class="list-group-item"> söka efter ett viss inlägg via vad dess titel är.</li>
+    </ul>
     
 <?php else : ?>
 
