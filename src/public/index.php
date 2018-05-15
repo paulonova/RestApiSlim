@@ -63,24 +63,24 @@ $app->post('/login', function ($request, $response, $args) {
 });
 
 
-$app->post('/user_register', function ($request, $response, $args) {
+// $app->post('/user_register', function ($request, $response, $args) {
    
-    $body = $request->getParsedBody();
-    $fetchUserStatement = $this->db->prepare("INSERT INTO users (username, password)
-                                                VALUES (:username, :password)");
-    $statement_status = $fetchUserStatement->execute([
-        ":username" => $_POST["username"], 
-        ":password" => $hashed
-    ]);
+//     $body = $request->getParsedBody();
+//     $fetchUserStatement = $this->db->prepare("INSERT INTO users (username, password)
+//                                                 VALUES (:username, :password)");
+//     $statement_status = $fetchUserStatement->execute([
+//         ":username" => $_POST["username"], 
+//         ":password" => $hashed
+//     ]);
 
-    $user = $fetchUserStatement->fetch();
-    if (password_verify($body['password'], $user['password'])) {
-        $_SESSION['loggedIn'] = true;
-        $_SESSION['userID'] = $user['id'];
-        return $response->withJson(['data' => [ $user['id'], $user['username'] ]]);
-    }
-    return $response->withJson(['error' => 'wrong password']);
-});
+//     $user = $fetchUserStatement->fetch();
+//     if (password_verify($body['password'], $user['password'])) {
+//         $_SESSION['loggedIn'] = true;
+//         $_SESSION['userID'] = $user['id'];
+//         return $response->withJson(['data' => [ $user['id'], $user['username'] ]]);
+//     }
+//     return $response->withJson(['error' => 'wrong password']);
+// });
 
 
 
