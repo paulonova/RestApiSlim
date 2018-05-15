@@ -25,9 +25,7 @@ $statement_status =  $statement->execute([
 ]);
 
 if($statement_status){
-  $_SESSION["message"] = "Successfully Registered!";
-  header('Location: ../views/login_view.php');
+  header('Location: ../views/login_view.php?message=Register Created');
 }else{
-  $_SESSION["message"] = "Register Failed!";
-  header('Location: ../views/login_view.php');
+  header('Location: ../views/login_view.php?message=Register Failed');
 }

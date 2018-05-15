@@ -34,6 +34,21 @@
 <?php endif ?>
 
 <!-- Alert login error Dialog -->
+<?php if(isset($_SESSION["login"])):?>
+        
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <?php 
+                echo $_SESSION["login"];
+                unset($_SESSION["login"]);
+            ?>
+        </div> 
+
+<?php endif ?>
+
+<!-- Alert logout  -->
 <?php if(isset($_SESSION["logout"])):?>
         
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -52,7 +67,7 @@
     <h1>Gruppuppgift - API</h1>    
     <h3>Ett API med Slim and PDO</h3> 
     <div class="to_login_container">
-        <a class="btn btn-warning" href="../views/login_view.php">Login Page</a>
+        <a class="btn btn-primary" href="../views/login_view.php">Login Page</a>
         <a class="btn btn-warning" href='../logout.php'>Logout here</a>
     </div>  
 </div>
