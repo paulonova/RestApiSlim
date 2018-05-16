@@ -27,8 +27,7 @@ if(password_verify($_POST["password"], $user["password"])){
     $_SESSION["user_id"] = $user["userID"];
 
 }else{
-    $_SESSION["message"] = "login failed";
-    header('Location: ./views/login_view.php');
+    header('Location: ./views/login_view.php?message=login failed');
 }
 
 

@@ -20,7 +20,7 @@ class TodoController{
     }
 
     public function getAll() {
-        $getAll = $this->db->prepare('SELECT * FROM todos');
+        $getAll = $this->db->prepare('SELECT * FROM entries');
         $getAll->execute();
         return $getAll->fetchAll();
     }

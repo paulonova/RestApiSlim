@@ -42,25 +42,25 @@ $app->get('/', function ($request, $response, $args) {
  * I added basic inline login functionality. This could be extracted to a
  * separate class. If the session is set is checked in 'auth.php'
  */
-$app->post('/login', function ($request, $response, $args) {
-    /**
-     * Everything sent in 'body' when doing a POST-request can be
-     * extracted with 'getParsedBody()' from the request-object
-     * https://www.slimframework.com/docs/v3/objects/request.html#the-request-body
-     */
-    $body = $request->getParsedBody();
-    $fetchUserStatement = $this->db->prepare('SELECT * FROM users WHERE username = :username');
-    $fetchUserStatement->execute([
-        ':username' => $body['username']
-    ]);
-    $user = $fetchUserStatement->fetch();
-    if (password_verify($body['username'], $user['password'])) {
-        $_SESSION['loggedIn'] = true;
-        $_SESSION['userID'] = $user['id'];
-        return $response->withJson(['data' => [ $user['id'], $user['username'] ]]);
-    }
-    return $response->withJson(['error' => 'wrong password']);
-});
+// $app->post('/login', function ($request, $response, $args) {
+//     /**
+//      * Everything sent in 'body' when doing a POST-request can be
+//      * extracted with 'getParsedBody()' from the request-object
+//      * https://www.slimframework.com/docs/v3/objects/request.html#the-request-body
+//      */
+//     $body = $request->getParsedBody();
+//     $fetchUserStatement = $this->db->prepare('SELECT * FROM users WHERE username = :username');
+//     $fetchUserStatement->execute([
+//         ':username' => $body['username']
+//     ]);
+//     $user = $fetchUserStatement->fetch();
+//     if (password_verify($body['username'], $user['password'])) {
+//         $_SESSION['loggedIn'] = true;
+//         $_SESSION['userID'] = $user['id'];
+//         return $response->withJson(['data' => [ $user['id'], $user['username'] ]]);
+//     }
+//     return $response->withJson(['error' => 'wrong password']);
+// });
 
 
 // $app->post('/user_register', function ($request, $response, $args) {
@@ -87,10 +87,10 @@ $app->post('/login', function ($request, $response, $args) {
 /**
  * Basic implementation, implement a better response
  */
-$app->get('/logout', function ($request, $response, $args) {
-    session_destroy();
-    return $response->withJson('Success');
-});
+// $app->get('/logout', function ($request, $response, $args) {
+//     session_destroy();
+//     return $response->withJson('Success');
+// });
 
 
 /**
@@ -101,22 +101,22 @@ $app->get('/logout', function ($request, $response, $args) {
 $app->group('/api', function () use ($app) {
 
     // GET http://localhost:XXXX/api/todos
-    $app->get('/todos', function ($request, $response, $args) {
+    $app->get('/entries', function ($request, $response, $args) {
         /**
          * $this->get('Todos') is available to us because we injected it into the container
          * in 'App/container.php'. This makes it easier for us to call the database
          * inside our routes.
          */
-        $allTodos = $this->todos->getAll();
+        $allEntries = $this->blog->getAll();
         /**
          * Wrapping the data when returning as a safety thing
          * https://www.owasp.org/index.php/AJAX_Security_Cheat_Sheet#Server_Side
          */
-        return $response->withJson(['data' => $allTodos]);
+        return $response->withJson(['data' => $allEntries]);
     });
 
     // GET http://localhost:XXXX/api/todos/5
-    $app->get('/todos/{id}', function ($request, $response, $args) {
+    $app->get('/entries/{id}', function ($request, $response, $args) {
         /**
          * {id} is a placeholder for whatever you write after todos. So if we write
          * /todos/4 the {id} will be 4. This gets saved in the $args array
@@ -125,19 +125,19 @@ $app->group('/api', function () use ($app) {
          * https://www.slimframework.com/docs/v3/objects/router.html#route-placeholders
          */
         $id = $args['id'];
-        $singleTodo = $this->todos->getOne($id);
+        $singleTodo = $this->blog->getOne($id);
         return $response->withJson(['data' => $singleTodo]);
     });
 
     // POST http://localhost:XXXX/api/todos
-    $app->post('/todos', function ($request, $response, $args) {
+    $app->post('/entry', function ($request, $response, $args) {
         /**
          * Everything sent in 'body' when doing a POST-request can be
          * extracted with 'getParsedBody()' from the request-object
          * https://www.slimframework.com/docs/v3/objects/request.html#the-request-body
          */
         $body = $request->getParsedBody();
-        $newTodo = $this->todos->add($body);
+        $newTodo = $this->blog->add($body);
         return $response->withJson(['data' => $newTodo]);
     });
 });

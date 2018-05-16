@@ -70,7 +70,6 @@ $container['view'] = function ($container) {
  * as calling $this->get('db') in our routes in index.php
  */
 $container['blog'] = function ($c) {
-    // $todosController = new TodoController($c->get('db'));
     $blogController = new BlogController($c->get('db'));
     return $blogController;
 };
