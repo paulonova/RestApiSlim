@@ -9,14 +9,16 @@ class BlogController{
         $this->db = $pdo;
     }
 
+    //Working..
     public function getAll() {
-        $getAll = $this->db->prepare('SELECT * FROM db_blog');
+        $getAll = $this->db->prepare('SELECT * FROM entries');
         $getAll->execute();
         return $getAll->fetchAll();
     }
 
+    //Working
     public function getOne($id){
-        $getOne = $this->db->prepare('SELECT * FROM db_blog WHERE id = :id');
+        $getOne = $this->db->prepare('SELECT * FROM entries WHERE entryID = :id');
         $getOne->execute([':id' => $id]);
         return $getOne->fetch();
     }
@@ -25,7 +27,7 @@ class BlogController{
         /**
          * Default 'completed' is false so we only need to insert the 'content'
          */
-        $addOne = $this->db->prepare('INSERT INTO db_blog (content) VALUES (:content)');
+        $addOne = $this->db->prepare('INSERT INTO entries (content) VALUES (:content)');
 
         /**
          * Insert the value from the parameter into the database

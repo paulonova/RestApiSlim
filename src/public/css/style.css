@@ -1,9 +1,4 @@
-/* body, html {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
-} */
+
 
 html{
   background-image: url("../images/bkg.jpg");
@@ -21,20 +16,21 @@ body{
   height: auto;
 }
 
-p.sub_title{
-  text-align: center;
-  font-size: 1.5rem;
+a.card-content{
+  background-color: rgb(175, 175, 175);
+  margin: 10px;
 }
 
-.container-fluid{
-  padding: 0;
-  border-radius: 0;
+p.mb-1{
+  color: whitesmoke;
+  font-weight: bold;
 }
+
+
 
 .alert{
   margin: 0;
 }
-
 
 /* X from the Alerts.. */
 .alert-dismissible .close{
@@ -78,13 +74,6 @@ p.sub_title{
   margin: 10px auto;
 }
 
-.to_login_container{
-  margin: 0 auto;
-}
-
-textarea{
-  margin-top: 10px;
-}
 
 .visible{
   visibility: visible;
@@ -107,108 +96,8 @@ input{
   margin-top: 10px;
 }
 
-button a{
-  color: white;
-}
-
-.msg {
-  margin: 0 auto; 
-  padding: 10px; 
-  border-radius: 5px; 
-  color: #3c763d; 
-  background: #dff0d8; 
-  border: 1px solid #3c763d;
-  width: 100%;
-  text-align: center;
-}
-
-/********************************/
-/*Getting Saved Articles title  */
-/********************************/
-.saved_articles{
-  font-family: 'Gaegu', cursive;
-  text-align: left;
-  font-size: 2.5vw;
-  text-shadow: 2px 2px 5px rgb(77, 75, 75);
-  color: #38686A;
-}
-
-.journal_container{
-  width: 80%;
-  margin: 0 auto;
-}
-
-.card {
-  display: block;
-  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.05);
-  margin-bottom: 20px;
-}
-
-.card-header{
-    background-color: #A3B4A2;
-    height: 15%;
-}
-
-
-.card-block{
-    background-color: rgb(241, 241, 235);
-}
-
-.card-title{
-  font-family: 'Gaegu', cursive;
-  overflow: hidden;
-  text-shadow: 2px 2px 5px rgb(77, 75, 75);
-  color: whitesmoke;
-  font-size: 5vh;
-}
-
-a.card_btn{
-  display: inline-block;
-  font-size: .7em;
-}
-
-a.card_btn:hover{      
-   color: rgb(28, 107, 28);      
-}
-
-
-.content{
-  font-family: 'Dancing Script', cursive;
-    padding: 10px;
-    font-size: 1.5rem;
-}
-
-.created_at{
-    font-size: .4em;
-    margin: 0;
-    background-color: #38686A;
-    color:whitesmoke;
-    padding: 10px;
-}
-
-.card_btn{
-    width: 100px;
-    text-align: center;
-    padding: 10px;
-    color:whitesmoke;
-    border-radius: 20%;
-    font-size: 1.5rem;
-    cursor: pointer;
-    border: none;
-}
 
 @media (min-width: 768px) and (max-width: 1450px){
-
-  
-  .card-title{
-      font-size: 4vh;
-    }
-  
-    a.card_btn{
-      font-size: .7em;
-    }
-
 
   .inlamning_title{
       background-size: contain auto;
@@ -223,26 +112,12 @@ a.card_btn:hover{
       font-size: 2em;
   }
 
-  .saved_articles{
-      font-size: 3.5vw;
-  }
-  
-
 }
 
 
 @media (min-width: 360px) and (max-width: 768px){
 
-  
 
-  .card-title{
-      font-size: 3vh;
-    }
-  
-    a.card_btn{
-      font-size: .7em;
-    }
-  
   .inlamning_title{
       background-size: contain auto;
       color: white;

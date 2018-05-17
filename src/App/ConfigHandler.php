@@ -34,7 +34,6 @@ class ConfigHandler {
         $config['db']['user']   = 'root';
         $config['db']['pass']   = 'root';
         $config['db']['dbname'] = 'db_blog';
-        // $config['db']['dbname'] = 'todos';
         return $config;
     }
 }

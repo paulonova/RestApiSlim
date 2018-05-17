@@ -12,7 +12,7 @@
     integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" 
     crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
-    <script src="scripts/main.js" defer></script>
+    <script src="/scripts/main.js" defer></script>
   <title>Gruppuppgift - API</title>
 </head>
 
@@ -77,22 +77,27 @@
     <h1>Welcome <?php echo $_SESSION["username"]?></h1>
     <hr>
     <!-- First page kode -->
-
-    <section id="container" class="">
-        <div id="entries_container" class="entries_container">
-
-        </div>
+    <div id="only-one" class="alert alert-success">
+        <h4 for="getOnlyOne">De 20 senaste inläggen</h4>
+    </div>
+    <section id="container">
+        <!-- JS Code  -->
     
     </section>
+    <hr>
 
+    <section id="only-one" class="alert alert-success">
+        <label for="getOnlyOne">Hämta ut ett enskilt specifikt inlägg:</label>
+        <input id="getOnlyOne" class="form-control" name="getOnlyOne" type="number" value="0" min="0">
+        <input id="oneBtn" type="button" class="btn btn-success" value="Hämta" >
+    <div id="only-one">
+        <br><br><br>
+        
+    </div>
+
+    </section>
     
-    <ul class="list-group">
     
-    
-        <li class="list-group-item list-group-item-success"><h2>API Links</h2></li>
-        <li class="list-group-item">Hämta ut de 20 senaste inläggen via GET /api/entries.</li>
-        <li class="list-group-item">skapa ett inlägg via POST /api/entries.</li>
-    </ul>
     
 <?php else : ?>
 

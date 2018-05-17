@@ -9,7 +9,8 @@
     integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" 
     crossorigin="anonymous">
     <link rel="stylesheet" href="../css/style.css">
-    <script src="../scripts/main.js" defer></script>
+    <script src="/scripts/main.js" defer></script>
+    <script src="/scripts/register.js" defer></script>
   <title>Gruppuppgift - API</title>
 </head>
 
