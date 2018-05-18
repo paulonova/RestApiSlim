@@ -1,7 +1,7 @@
 <?php
 namespace App\Controllers;
 
-class BlogController{
+class EntriesController{
     private $db;
 
 
@@ -11,7 +11,7 @@ class BlogController{
 
     //Working..
     public function getAll() {
-        $getAll = $this->db->prepare('SELECT * FROM entries');
+        $getAll = $this->db->prepare('SELECT * FROM entries LIMIT 20');
         $getAll->execute();
         return $getAll->fetchAll();
     }
@@ -44,6 +44,22 @@ class BlogController{
             'content' => $blog['content'],
             'completed' => false
         ];
+    }
+
+
+    // public function deleteEntryById($entryID){
+    //     $sth = $this->db->prepare("DELETE FROM entries WHERE entryID=:id");
+    //     $sth->bindParam("id", $entryID);
+    //     $sth->execute();
+    //     $resp = $sth->fetchAll();
+    //     return $this->response->withJson($resp);
+    // }
+
+    public function deleteOne($id){
+        $deleteOne = $this->db->prepare('DELETE FROM entries WHERE entryID=:id');
+        $deleteOne->execute([':id' => $id]);
+        $resp = $deleteOne->fetchAll();
+        return $response->withJson($resp);
     }
 
 

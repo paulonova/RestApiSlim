@@ -94,7 +94,7 @@ small{
 }
 
 .hidden{
-  visibility: hidden;
+  display: none;
 }
 
 button, input[type='submit']{

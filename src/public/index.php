@@ -47,11 +47,6 @@ $app->group('/api', function () use ($app) {
 
     // GET http://localhost:XXXX/api/todos
     $app->get('/entries', function ($request, $response, $args) {
-        /**
-         * $this->get('Todos') is available to us because we injected it into the container
-         * in 'App/container.php'. This makes it easier for us to call the database
-         * inside our routes.
-         */
         $allEntries = $this->blog->getAll();
         /**
          * Wrapping the data when returning as a safety thing
@@ -74,7 +69,6 @@ $app->group('/api', function () use ($app) {
         return $response->withJson(['data' => $singleTodo]);
     });
 
-    // POST http://localhost:XXXX/api/todos
     $app->post('/entry', function ($request, $response, $args) {
         /**
          * Everything sent in 'body' when doing a POST-request can be
@@ -85,6 +79,18 @@ $app->group('/api', function () use ($app) {
         $newTodo = $this->blog->add($body);
         return $response->withJson(['data' => $newTodo]);
     });
+    
+
+    $app->delete('/entries/{id}', function ($request, $response, $args) {
+        $id = $args['id'];
+        $singleEntry = $this->entries->deleteOne($id);
+        $resp = $singleEntry->fetchAll();
+        return $response->withJson(['data' => $singleEntry]);
+        
+    });
+    
+
+
 });
 
 $app->run();

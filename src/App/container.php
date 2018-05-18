@@ -1,9 +1,9 @@
 <?php
 
 /**
- * We rename or make a shortcut to the BlogController
+ * We rename or make a shortcut to the EntriesController
  */
-use \App\Controllers\BlogController as BlogController;
+use \App\Controllers\EntriesController as EntriesController;
 
 require_once 'ConfigHandler.php';
 
@@ -70,7 +70,7 @@ $container['view'] = function ($container) {
  * as calling $this->get('db') in our routes in index.php
  */
 $container['blog'] = function ($c) {
-    $blogController = new BlogController($c->get('db'));
+    $blogController = new EntriesController($c->get('db'));
     return $blogController;
 };
 

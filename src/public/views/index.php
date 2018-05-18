@@ -76,27 +76,36 @@
 
     <h4 class="welcome_user">Welcome <?php echo $_SESSION["username"]?></h4>
     <hr>
-    <!-- First page kode -->
-    <section class="alert alert-success">
-        <h4>De 20 senaste inläggen</h4>
-    </section>
-
-    <section id="container">
-        <!-- JS Code  -->
     
-    </section>
+    <div class="alert alert-success"> <!-- the green header -->
+        <h4>De 20 senaste inläggen</h4>
+    </div><!-- the green header -->
+
+    <section id="container"> <!-- Show all entries limit 20 -->        
+    
+    </section> <!-- Show all entries limit 20 -->
     <hr>
-
-    <section class="alert alert-success">
+    
+    <section class="alert alert-success"> <!-- Show a single entry -->
         <label for="getOnlyOne">Hämta ut ett enskilt specifikt inlägg:</label>
-        <input id="getOnlyOne" class="form-control" name="getOnlyOne" type="number" value="0" min="0">
+        <input id="getOnlyOne" class="form-control" name="getOnlyOne" type="number" value="1" min="1">
         <input id="oneBtn" type="button" class="btn btn-success" value="Hämta" >
-    <div id="only_one">
-        
-        
-    </div>
+        <br><br>  
 
-    </section>
+        <div id="only_one" class="hidden list-group"> 
+            <a href="#" class="list-group-item card-content list-group-item-action flex-column align-items-start active">
+                <div class="d-flex w-100 justify-content-between">
+                    <h3 id="entry_title" class="mb-1">List group item heading</h3>
+                    <small id="entry_date">3 days ago</small>
+                    <small id="entry_id">Entry id</small>
+                </div>
+                <p id="entry_content" class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                <small id="created_by">Donec id elit non mi porta.</small>
+                <button id="hidde_one" class="btn btn-success">Delete</button>
+            </a>    
+        </div> 
+
+    </section> <!-- Show a single entry -->
     
     
     
