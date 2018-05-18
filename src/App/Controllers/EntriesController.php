@@ -24,15 +24,16 @@ class EntriesController{
     }
 
     public function add($blog){
-        /**
-         * Default 'completed' is false so we only need to insert the 'content'
-         */
-        $addOne = $this->db->prepare('INSERT INTO entries (content) VALUES (:content)');
 
-        /**
-         * Insert the value from the parameter into the database
-         */
-        $addOne->execute([':content' => $blog['content']]);
+        $addOne = $this->db->prepare('INSERT INTO entries (title, content, createdBy, createdAt) 
+                                      VALUES (:title, :content, :createdBy, :createdAt)');
+        $addOne->execute([
+            ':title' => $blog['title'],
+            ':content' => $blog['content'],
+            ':createdBy' => $blog['createdBy'],
+            ':createdAt' => $blog['createdAt']
+            
+            ]);
 
         /**
          * A INSERT INTO does not return the created object. If we want to return it to the user
@@ -40,26 +41,19 @@ class EntriesController{
          * We can always get the last inserted row in a database by calling 'lastInsertId()'-function
          */
         return [
-            'id' => (int)$this->db->lastInsertId(),
-            'content' => $blog['content'],
-            'completed' => false
+            // 'id' => (int)$this->db->lastInsertId(),
+            ':title' => $blog['title'],
+            ':content' => $blog['content'],
+            ':createdBy' => $blog['createdBy'],
+            ':createdAt' => $blog['createdAt']
         ];
     }
 
-
-    // public function deleteEntryById($entryID){
-    //     $sth = $this->db->prepare("DELETE FROM entries WHERE entryID=:id");
-    //     $sth->bindParam("id", $entryID);
-    //     $sth->execute();
-    //     $resp = $sth->fetchAll();
-    //     return $this->response->withJson($resp);
-    // }
-
     public function deleteOne($id){
-        $deleteOne = $this->db->prepare('DELETE FROM entries WHERE entryID=:id');
+
+        $deleteOne = $this->db->prepare('DELETE FROM entries WHERE entryID = :id');
         $deleteOne->execute([':id' => $id]);
-        $resp = $deleteOne->fetchAll();
-        return $response->withJson($resp);
+
     }
 
 

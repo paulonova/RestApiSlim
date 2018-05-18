@@ -80,16 +80,18 @@ $app->group('/api', function () use ($app) {
         return $response->withJson(['data' => $newTodo]);
     });
     
+    /**DELETE working ****************************************** */
+    $app->delete('/entries/{id}', function ($request, $response, $args) {       
 
-    $app->delete('/entries/{id}', function ($request, $response, $args) {
-        $id = $args['id'];
-        $singleEntry = $this->entries->deleteOne($id);
-        $resp = $singleEntry->fetchAll();
-        return $response->withJson(['data' => $singleEntry]);
+        try{
+            $id = $args['id'];
+            $singleEntry = $this->blog->deleteOne($id);
+            return $response->withJson(['data' => $singleEntry]);
+        }catch(PDOException $e){
+            echo $e->getMessage();
+        }
         
     });
-    
-
 
 });
 

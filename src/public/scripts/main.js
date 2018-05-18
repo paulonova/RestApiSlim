@@ -69,7 +69,8 @@ function createElementCards(elementId, entryID, title, content, createdAt, creat
 
 }
 
-/**Get all Entries */
+ /************************************************************ */
+/**SELECT all Entries *********************************************/
   async function getAllEntries() {
     const response = await fetch('api/entries');
     const { data } = await response.json();
@@ -91,17 +92,16 @@ function createElementCards(elementId, entryID, title, content, createdAt, creat
 
 
   /************************************************************ */
-  /**This function get a single entry and populate the html *****/
+  /**SELECT a single entry **************************************/
+
     async function getSingleEntry(id) {
       const response = await fetch('api/entries/' + id);
       const { data } = await response.json();
       var date = data.createdAt.split(" ");
-      // seOnlyOneEntry(data.entryID, data.title, data.content, date[0], data.createdBy);
       getOnlyOneEntry(data.entryID, data.title, date[0], data.content, data.createdBy);
     
   }  
   
-  /************************************************************ */
   /**This function populate a Card in html with onnly one entry */
   function getOnlyOneEntry(entryID, title, date, content, createdBy){  
     var container = document.getElementById("only_one");
@@ -140,8 +140,68 @@ function createElementCards(elementId, entryID, title, content, createdAt, creat
 
 
   function deleteOne(id){
+
     
   }
+
+  /************************************************************ */
+  /**INSERT new Entry ******************************************/
+
+  // function postTodo(){
+  //   // x-www-form-urlencoded
+  //   const formData = new FormData();
+  //   const todoInput = document.getElementById('todoInput');
+  //   formData.append('content', todoInput.value);
+  
+  //   const postOptions = {
+  //     method: 'POST',
+  //     body: formData,
+  //     // MUCH IMPORTANCE!
+  //     credentials: 'include'
+  //   }
+  
+  //   fetch('api/todos', postOptions)
+  //     .then(res => res.json())
+  //     .then((newTodo) => {
+  //         document.body.insertAdjacentHTML('beforeend', newTodo.data.content);
+  //     });
+  // }
+
+  function insertNewEntry() {
+
+    const formData = new FormData();
+    let title = document.getElementById("entry_title").value;
+    formData.append('title', title);
+    let entryContent = document.getElementById("entry_content").value;
+    formData.append('content', entryContent);
+    let entryCreatedBy = document.getElementById("created_by").value;
+    formData.append('createdBy', entryCreatedBy);
+    let entryDate = document.getElementById("entry_created_at").value;
+    formData.append('createdAt', entryDate);
+
+    console.log(title + entryContent + entryCreatedBy + entryDate);
+
+  //   const postOptions = {
+  //     method: 'POST',
+  //     body: formData,
+  //     credentials: 'include'
+  //   }
+  
+  //   fetch('api/entry', postOptions)
+  //   .then(res => res.json())
+  //   .then((newEntry) => {
+  //     document.body.insertAdjacentHTML('beforeend', newEntry.data.content);
+  // });  
+} 
+
+var saveBtn = document.getElementById("saveEntry");
+saveBtn.addEventListener("click", function(evt){
+  console.log("SAVED");
+  insertNewEntry();
+  evt.preventDefault();
+});
+
+
 
 
   /****************************************************************************************** */

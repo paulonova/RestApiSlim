@@ -89,7 +89,7 @@
     <section class="alert alert-success"> <!-- Show a single entry -->
         <label for="getOnlyOne">Hämta ut ett enskilt specifikt inlägg:</label>
         <input id="getOnlyOne" class="form-control" name="getOnlyOne" type="number" value="1" min="1">
-        <input id="oneBtn" type="button" class="btn btn-success" value="Hämta" >
+        <input id="oneBtn" type="button" class="btn btn-success" value="get only one" >
         <br><br>  
 
         <div id="only_one" class="hidden list-group"> 
@@ -101,11 +101,44 @@
                 </div>
                 <p id="entry_content" class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
                 <small id="created_by">Donec id elit non mi porta.</small>
-                <button id="hidde_one" class="btn btn-success">Delete</button>
+                <button id="hidde_one" class="btn btn-success">Hidde</button>
             </a>    
         </div> 
 
     </section> <!-- Show a single entry -->
+
+    <section class="jornal_form"> <!-- Section Journal Entries -->
+        <h2 class="saved_articles">Create Entry</h2>
+        <form >
+            <!-- Title -->
+            <input id="entry_title" type="text" name ="entry_title" value= "" class="form-control" 
+                    placeholder="Title.." required autofocus> <!-- Title -->
+
+            <!-- Id to update entry -->     
+            <input id="entry_id" class="form-control" name="getOnlyOne" placeholder="Entry id only to update.."
+                                type="number" value="" min="1" disabled required autofocus>            
+
+            <!-- content -->
+            <textarea id="entry_content" class="form-control" name="journal_area"  
+                    placeholder="Write yor story here.." rows="4" required autofocus></textarea>  <!-- Journal annotation -->
+
+            <!-- Created By user id -->     
+            <input id="created_by" class="form-control" name="getOnlyOne" placeholder="Created by userId"
+                                type="number" value="" min="1" required autofocus>
+
+            <!-- Date -->
+            <input id="entry_created_at" type="date" class="form-control" name="entry_created_at" 
+                        value="" required autofocus/>  <!-- Date -->            
+
+            <div class="signin_btn"> <!-- Save/update button -->
+                <input id="updateEntry" class="btn btn-warning" name="update" value="Update" type="submit">
+                <input id="saveEntry" class="btn btn-lg btn-primary" name="save" value="Save" type="submit"> 
+            </div> <!-- Save/update button -->
+            
+
+        </form>
+    </section><!-- Section Entries -->
+    <hr>
     
     
     
