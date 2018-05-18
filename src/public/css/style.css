@@ -17,7 +17,7 @@ body{
 }
 
 a.card-content{
-  background-color: rgb(175, 175, 175);
+  background-color: rgb(99, 99, 99);
   margin: 10px;
 }
 
@@ -26,7 +26,21 @@ p.mb-1{
   font-weight: bold;
 }
 
+h3.mb-1{
+  font-size: 2vw;  
+}
 
+small{
+  color: whitesmoke;
+  font-style: italic;
+}
+
+.welcome_user{
+  text-align: center;
+  font-family: 'Gaegu', cursive;
+  font-size: 2rem;
+  margin: 0;
+}
 
 .alert{
   margin: 0;
@@ -112,6 +126,10 @@ input{
       font-size: 2em;
   }
 
+  h3.mb-1{
+    font-size: 2vw;
+  }
+
 }
 
 
@@ -133,6 +151,10 @@ input{
 
   .saved_articles{
       font-size: 5vw;
+  }
+
+  h3.mb-1{
+    font-size: 4vw;
   }
 
 }

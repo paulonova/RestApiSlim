@@ -63,35 +63,36 @@
 
 <?php endif ?>
 
-<div class="inlamning_title jumbotron">
+<header class="inlamning_title jumbotron">
     <h1>Gruppuppgift - API</h1>    
     <h3>Ett API med Slim and PDO</h3> 
     <div class="to_login_container">
         <a class="btn btn-primary" href="../views/login_view.php">Login Page</a>
         <a class="btn btn-warning" href='../logout.php'>Logout here</a>
     </div>  
-</div>
+</header>
 
 <?php if (isset($_SESSION["loggedIn"])): ?>
 
-    <h1>Welcome <?php echo $_SESSION["username"]?></h1>
+    <h4 class="welcome_user">Welcome <?php echo $_SESSION["username"]?></h4>
     <hr>
     <!-- First page kode -->
-    <div id="only-one" class="alert alert-success">
-        <h4 for="getOnlyOne">De 20 senaste inläggen</h4>
-    </div>
+    <section class="alert alert-success">
+        <h4>De 20 senaste inläggen</h4>
+    </section>
+
     <section id="container">
         <!-- JS Code  -->
     
     </section>
     <hr>
 
-    <section id="only-one" class="alert alert-success">
+    <section class="alert alert-success">
         <label for="getOnlyOne">Hämta ut ett enskilt specifikt inlägg:</label>
         <input id="getOnlyOne" class="form-control" name="getOnlyOne" type="number" value="0" min="0">
         <input id="oneBtn" type="button" class="btn btn-success" value="Hämta" >
-    <div id="only-one">
-        <br><br><br>
+    <div id="only_one">
+        
         
     </div>
 

@@ -39,61 +39,6 @@ $app->get('/', function ($request, $response, $args) {
 
 
 /**
- * I added basic inline login functionality. This could be extracted to a
- * separate class. If the session is set is checked in 'auth.php'
- */
-// $app->post('/login', function ($request, $response, $args) {
-//     /**
-//      * Everything sent in 'body' when doing a POST-request can be
-//      * extracted with 'getParsedBody()' from the request-object
-//      * https://www.slimframework.com/docs/v3/objects/request.html#the-request-body
-//      */
-//     $body = $request->getParsedBody();
-//     $fetchUserStatement = $this->db->prepare('SELECT * FROM users WHERE username = :username');
-//     $fetchUserStatement->execute([
-//         ':username' => $body['username']
-//     ]);
-//     $user = $fetchUserStatement->fetch();
-//     if (password_verify($body['username'], $user['password'])) {
-//         $_SESSION['loggedIn'] = true;
-//         $_SESSION['userID'] = $user['id'];
-//         return $response->withJson(['data' => [ $user['id'], $user['username'] ]]);
-//     }
-//     return $response->withJson(['error' => 'wrong password']);
-// });
-
-
-// $app->post('/user_register', function ($request, $response, $args) {
-   
-//     $body = $request->getParsedBody();
-//     $fetchUserStatement = $this->db->prepare("INSERT INTO users (username, password)
-//                                                 VALUES (:username, :password)");
-//     $statement_status = $fetchUserStatement->execute([
-//         ":username" => $_POST["username"], 
-//         ":password" => $hashed
-//     ]);
-
-//     $user = $fetchUserStatement->fetch();
-//     if (password_verify($body['password'], $user['password'])) {
-//         $_SESSION['loggedIn'] = true;
-//         $_SESSION['userID'] = $user['id'];
-//         return $response->withJson(['data' => [ $user['id'], $user['username'] ]]);
-//     }
-//     return $response->withJson(['error' => 'wrong password']);
-// });
-
-
-
-/**
- * Basic implementation, implement a better response
- */
-// $app->get('/logout', function ($request, $response, $args) {
-//     session_destroy();
-//     return $response->withJson('Success');
-// });
-
-
-/**
  * The group is used to group everything connected to the API under '/api'
  * This was done so that we can check if the user is authed when calling '/api'
  * but we don't have to check for auth when calling '/signin'

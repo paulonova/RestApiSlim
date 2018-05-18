@@ -5,8 +5,8 @@
 /****************************************************** */
 
 /**Creating a CadView */
-function createElementCards(entryID, title, content, createdAt, createdBy){
-    var entries_container = document.getElementById("container");
+function createElementCards(elementId, entryID, title, content, createdAt, createdBy){
+    var entries_container = document.getElementById(elementId);
     
     var listGroupDiv = document.createElement("DIV");
     listGroupDiv.setAttribute("class", "list-group");    
@@ -42,6 +42,12 @@ function createElementCards(entryID, title, content, createdAt, createdBy){
     smallBy.appendChild(smallByText);
     a.appendChild(smallBy);
 
+    let delBtn = document.createElement("BUTTON");
+    delBtn.setAttribute("class", "btn btn-success");
+    let delText = document.createTextNode("Delete");
+    delBtn.appendChild(delText);
+    a.appendChild(delBtn);
+
 }
 
 /**Get all Entries */
@@ -53,6 +59,7 @@ function createElementCards(entryID, title, content, createdAt, createdBy){
     for (const resurse of data) {
         var date = resurse.createdAt.split(" ");
         createElementCards(
+            "container",
             resurse.entryID,
             resurse.title,
             resurse.content,
@@ -64,23 +71,23 @@ function createElementCards(entryID, title, content, createdAt, createdBy){
   getAllEntries();
 
 
+  /** Button to get only one Entry*/
   var onlyOneBtn = document.getElementById("oneBtn");
     onlyOneBtn.addEventListener("click", function(){
-       main(1);
+        var container = document.getElementById("only_one");
+        // container.removeChild();
+        let entryID = document.getElementById("getOnlyOne").value;        
+        main(entryID + 1);
 })
 
 /**Get only one entry */
-async function main(amount) {
-    const response = await fetch('api/entries/' + amount);
+async function main(entryID) {
+    const response = await fetch('api/entries/' + entryID);
     const { data } = await response.json();
-
-    createElementCards(data.entryID, data.title, data.content, data.createdBy, data.createdAt);
-    // console.log("*********************************");
-    // console.log("entryID: " + data.entryID);
-    // console.log("Title: " + data.title);
-    // console.log("Content: " + data.content);
-    // console.log("Created by: " + data.createdBy);
-    // console.log("Created at: " + data.createdAt);
+    var date = data.createdAt;
+    date.split(" ");
+    createElementCards("only_one", data.entryID, data.title, data.content, date[0], data.createdBy);
+    
   }  
   
 
