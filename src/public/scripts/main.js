@@ -7,7 +7,8 @@
 /**Creating a CadView */
 function createElementCards(elementId, entryID, title, content, createdAt, createdBy){
     var entries_container = document.getElementById(elementId);
-    
+
+    //Containers
     var listGroupDiv = document.createElement("DIV");
     listGroupDiv.setAttribute("class", "list-group");    
     entries_container.appendChild(listGroupDiv);
@@ -27,6 +28,7 @@ function createElementCards(elementId, entryID, title, content, createdAt, creat
     let h3Text  = document.createTextNode(title);
     h3.appendChild(h3Text);
     contentBetweenDiv.appendChild(h3);
+
     // Created at
     let smallAt = document.createElement("SMALL");
     let smallAtText = document.createTextNode(createdAt);
@@ -61,12 +63,88 @@ function createElementCards(elementId, entryID, title, content, createdAt, creat
     a.appendChild(delBtn);
 
     delBtn.addEventListener("click", function(evt){
-      console.log("EntryID: " + entryID);
+      deleteEntry(entryID);
       evt.preventDefault();
-    })
+    });   
 
-    //Textarea to comments
+}
 
+var text = "It is also worth noting that you can directly" +
+"chain multiple promise blocks (.then() blocks, but there " +
+"are other types too) onto the end of one another, passing the" + 
+"result of each block to the next block as you travel down the chain." + 
+"This makes promises very powerful."
+
+createCommentCards("commentId", "entryId", text, "createdBy", "createdAt");
+createCommentCards("commentId", "entryId", text, "createdBy", "createdAt");
+createCommentCards("commentId", "entryId", text, "createdBy", "createdAt");
+
+//Comment Container..
+function createCommentCards(commentId, entryId, comment, createdBy, createdAt){
+
+    //Containers
+    let commentContainer = document.getElementById("comment_container");
+
+    let commentCard = document.createElement("DIV");
+    commentCard.setAttribute("class", "card comment-card");
+    commentCard.setAttribute("id", "comment_card");
+
+    let commentBody = document.createElement("DIV");
+    commentBody.setAttribute("class", "card-body comment-body");
+    commentBody.setAttribute("id", "comment_body");
+    commentCard.appendChild(commentBody);
+
+    var commentDetail = document.createElement("DIV");
+    commentDetail.setAttribute("class", "comment-detail");
+    commentDetail.setAttribute("id", "comment_detail");
+    commentBody.appendChild(commentDetail);
+
+
+    // Comment
+    let smallcomment = document.createElement("P");
+    smallcomment.setAttribute("id", "comment");
+    smallcomment.setAttribute("class", "mb-1");
+    let smallComText = document.createTextNode(comment);
+    smallcomment.appendChild(smallComText);
+    commentBody.appendChild(smallcomment);
+
+    commentContainer.appendChild(commentCard);
+
+  
+
+    //Comment Id
+    let comment_id = document.createElement("SMALL");
+    comment_id.setAttribute("id", "comment_id");
+    let commIdText = document.createTextNode(commentId);
+    comment_id.appendChild(commIdText);
+    commentDetail.appendChild(comment_id);
+
+    //Entry Id
+    let entry_id = document.createElement("SMALL");
+    entry_id.setAttribute("id", "comment_entry_id");
+    let entryText = document.createTextNode(entryId);
+    entry_id.appendChild(entryText);
+    commentDetail.appendChild(entry_id);
+
+    //Created by
+    let smallBy = document.createElement("SMALL");
+    smallBy.setAttribute("id", "comment_created_by");
+    let smallByText = document.createTextNode(createdBy);
+    smallBy.appendChild(smallByText);
+    commentDetail.appendChild(smallBy);
+    
+    //Created at
+    let smallAt = document.createElement("SMALL");
+    smallAt.setAttribute("id", "comment_created_at");
+    let smallAtText = document.createTextNode(createdAt);
+    smallAt.appendChild(smallAtText);
+    commentDetail.appendChild(smallAt);
+
+
+}
+
+function populateComments(createdBy, entryId){
+  fetch()
 }
 
  /************************************************************ */
@@ -80,11 +158,11 @@ function createElementCards(elementId, entryID, title, content, createdAt, creat
         var date = resurse.createdAt.split(" ");
         createElementCards(
             "container",
-            "Entry id: " + resurse.entryID,
+            resurse.entryID,
             resurse.title,
             resurse.content,
             date[0],
-            "Created by id:" + resurse.createdBy
+            resurse.createdBy
         );    
     }    
   }
@@ -138,9 +216,25 @@ function createElementCards(elementId, entryID, title, content, createdAt, creat
         evt.preventDefault();
 })
 
+async function getSingleEntry(id) {
+  const response = await fetch('api/entries/' + id);
+  const { data } = await response.json();
+  var date = data.createdAt.split(" ");
+  getOnlyOneEntry(data.entryID, data.title, date[0], data.content, data.createdBy);
 
-  function deleteOne(id){
+}  
 
+/************************************************************ */
+  /**DELETE a Entry ******************************************/
+  async function deleteEntry(id){
+    console.log(id);
+    let url = "api/entry/" + id;
+    console.log(url);
+    fetch(url, {
+      method: 'delete'
+    }).then(r => r.json());
+
+    window.location.reload(false);   
     
   }
 

@@ -21,6 +21,10 @@ a.card-content{
   margin: 10px;
 }
 
+a{
+  color: whitesmoke;
+}
+
 p.mb-1{
   color: whitesmoke;
   font-weight: bold;
@@ -30,10 +34,31 @@ h3.mb-1{
   font-size: 2vw;  
 }
 
+/*COMMENT STYLES*/
+
+.comment-container{
+  width: 85%;
+  margin: 0 auto;  
+}
+
+.comment-body {
+  background-color: rgb(99, 99, 99);
+  margin: 10px;
+}
+
 small{
-  color: whitesmoke;
   font-style: italic;
 }
+
+.comment-detail{
+  display: flex;
+  margin-bottom: 17px;
+  color:#8FBC8F;
+  justify-content: space-around;
+}
+
+
+
 
 .welcome_user{
   text-align: center;
@@ -45,6 +70,8 @@ small{
 .alert{
   margin: 0;
 }
+
+
 
 /* X from the Alerts.. */
 .alert-dismissible .close{

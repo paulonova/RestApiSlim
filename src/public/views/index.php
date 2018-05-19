@@ -134,12 +134,41 @@
                 <input id="updateEntry" class="btn btn-warning" name="update" value="Update" type="submit">
                 <input id="saveEntry" class="btn btn-lg btn-primary" name="save" value="Save" type="submit"> 
             </div> <!-- Save/update button -->
-            
+            <hr>
 
+            <!-- Save Comments -->
+            <div class="form-group">
+                <label for="comm_area">Comment</label>
+                <!-- Comment -->
+                <textarea class="form-control" id="comment_area" rows="3"></textarea>
+                <!-- Entry id -->     
+                <input id="comm_entry_id" class="form-control" name="entry-id" placeholder="insert entry id"
+                                type="number" value="" min="1" required autofocus>
+                <!-- Ceated  by -->     
+                <input id="comm_created_by" class="form-control" name="created-by" placeholder="Created by"
+                                type="number" value="" min="1" required autofocus>
+                <!-- Created at -->
+                <input id="comm_created_at" type="date" class="form-control" name="created-at" 
+                        value="" required autofocus/>  <!-- Date -->  
+                <div class="signin_btn"> <!-- Save/update button -->
+                    <input id="saveEntry" class="btn btn-lg btn-primary" name="save" value="Save Comment" type="submit"> 
+                </div> <!-- Save Comments -->               
+
+            </div>
         </form>
     </section><!-- Section Entries -->
     <hr>
-    
+
+    <!-- Show all Comments -->
+    <h2 class="alert alert-success">Show all Comments</h2>
+    <section id="comment_container" class="comment-container"></section>
+        
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     
     
 <?php else : ?>

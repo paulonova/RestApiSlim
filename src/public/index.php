@@ -81,17 +81,31 @@ $app->group('/api', function () use ($app) {
     });
     
     /**DELETE working ****************************************** */
-    $app->delete('/entries/{id}', function ($request, $response, $args) {       
+    $app->delete('/entry/{id}', function ($request, $response, $args) {       
 
         try{
             $id = $args['id'];
             $singleEntry = $this->blog->deleteOne($id);
-            return $response->withJson(['data' => $singleEntry]);
+            return $response->withJson(['data' => true]);
         }catch(PDOException $e){
+            return $response->withJson(['data' => false]);
             echo $e->getMessage();
-        }
-        
+        }        
     });
+
+
+    /**COMMENTS ****************************************** */
+    $app->get('/comments/{id}', function ($request, $response, $args){
+
+        $id = $args['id'];
+        $comment = $this->blog->getOneComments($id);
+        return $response->withJson(['data' => $comment]);
+
+    });
+
+
+
+
 
 });
 
