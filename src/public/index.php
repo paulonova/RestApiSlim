@@ -93,6 +93,14 @@ $app->group('/api', function () use ($app) {
         }        
     });
 
+    /**UPDATE working ****************************************** */
+    $app->patch('/entry/{id}', function($request, $response, $args){
+
+        $body = $request->getParsedBody();
+        $updateEntry = $this->blog->updateEntry($body, $args['id']);
+        return $response->withJson(['data' => $updateEntry]);
+    });
+
 
     /**COMMENTS ****************************************** */
     $app->get('/comments/{id}', function ($request, $response, $args){

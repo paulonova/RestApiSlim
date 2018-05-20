@@ -35,18 +35,38 @@ class EntriesController{
             
             ]);
 
-        /**
-         * A INSERT INTO does not return the created object. If we want to return it to the user
-         * that has posted the todo we must build it ourself or fetch it after we have inserted it
-         * We can always get the last inserted row in a database by calling 'lastInsertId()'-function
-         */
-        return [
+            return [
             // 'id' => (int)$this->db->lastInsertId(),
             ':title' => $blog['title'],
             ':content' => $blog['content'],
             ':createdBy' => $blog['createdBy'],
             ':createdAt' => $blog['createdAt']
         ];
+    }
+
+    public function updateEntry($blog, $id){
+
+        $update = $this->db->prepare('UPDATE entries 
+                                      SET title= :title, content= :content, createdBy= :createdBy, createdAt= :createdAt
+                                      WHERE entryID= :entryID');
+        $update->execute([
+            ':title' => $blog['title'],
+            ':content' => $blog['content'],
+            ':createdBy' => $blog['createdBy'],
+            ':createdAt' => $blog['createdAt'],
+            ':entryID' => $id         
+            ]);
+
+        
+        return [
+            // 'id' => (int)$this->db->lastInsertId(),
+            ':title' => $blog['title'],
+            ':content' => $blog['content'],
+            ':createdBy' => $blog['createdBy'],
+            ':createdAt' => $blog['createdAt'],
+            ':entryID' => $id
+        ];
+
     }
 
     public function deleteOne($id){

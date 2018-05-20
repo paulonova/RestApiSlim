@@ -31,13 +31,15 @@ function createElementCards(elementId, entryID, title, content, createdAt, creat
 
     // Created at
     let smallAt = document.createElement("SMALL");
-    let smallAtText = document.createTextNode(createdAt);
+    let creAt = "Created at: " + createdAt;
+    let smallAtText = document.createTextNode(creAt);
     smallAt.appendChild(smallAtText);
     contentBetweenDiv.appendChild(smallAt);
 
     //Entry Id
     let entry_id = document.createElement("SMALL");
-    let entryText = document.createTextNode(entryID);
+    let entrId = "Entry id: " + entryID;
+    let entryText = document.createTextNode(entrId);
     entry_id.appendChild(entryText);
     contentBetweenDiv.appendChild(entry_id);
 
@@ -50,7 +52,8 @@ function createElementCards(elementId, entryID, title, content, createdAt, creat
 
     //Created by
     let smallBy = document.createElement("SMALL");
-    let smallByText = document.createTextNode(createdBy);
+    let creBy = "Created by: " + createdBy;
+    let smallByText = document.createTextNode(creBy);
     smallBy.appendChild(smallByText);
     a.appendChild(smallBy);
 
@@ -107,10 +110,7 @@ function createCommentCards(commentId, entryId, comment, createdBy, createdAt){
     let smallComText = document.createTextNode(comment);
     smallcomment.appendChild(smallComText);
     commentBody.appendChild(smallcomment);
-
-    commentContainer.appendChild(commentCard);
-
-  
+    commentContainer.appendChild(commentCard);  
 
     //Comment Id
     let comment_id = document.createElement("SMALL");
@@ -171,7 +171,6 @@ function populateComments(createdBy, entryId){
 
   /************************************************************ */
   /**SELECT a single entry **************************************/
-
     async function getSingleEntry(id) {
       const response = await fetch('api/entries/' + id);
       const { data } = await response.json();
@@ -239,63 +238,87 @@ async function getSingleEntry(id) {
   }
 
   /************************************************************ */
-  /**INSERT new Entry ******************************************/
-
-  // function postTodo(){
-  //   // x-www-form-urlencoded
-  //   const formData = new FormData();
-  //   const todoInput = document.getElementById('todoInput');
-  //   formData.append('content', todoInput.value);
-  
-  //   const postOptions = {
-  //     method: 'POST',
-  //     body: formData,
-  //     // MUCH IMPORTANCE!
-  //     credentials: 'include'
-  //   }
-  
-  //   fetch('api/todos', postOptions)
-  //     .then(res => res.json())
-  //     .then((newTodo) => {
-  //         document.body.insertAdjacentHTML('beforeend', newTodo.data.content);
-  //     });
-  // }
-
+  /**CREATE ENTRY ***********************************************/
   function insertNewEntry() {
 
     const formData = new FormData();
     let title = document.getElementById("entry_title").value;
     formData.append('title', title);
-    let entryContent = document.getElementById("entry_content").value;
+    let entryContent = document.getElementById("content_entry").value;
     formData.append('content', entryContent);
-    let entryCreatedBy = document.getElementById("created_by").value;
+    let entryCreatedBy = document.getElementById("entry_created_by").value;
     formData.append('createdBy', entryCreatedBy);
     let entryDate = document.getElementById("entry_created_at").value;
     formData.append('createdAt', entryDate);
 
-    console.log(title + entryContent + entryCreatedBy + entryDate);
-
-  //   const postOptions = {
-  //     method: 'POST',
-  //     body: formData,
-  //     credentials: 'include'
-  //   }
+    const postOptions = {
+      method: 'POST',
+      body: formData,
+      credentials: 'include'
+    }
   
-  //   fetch('api/entry', postOptions)
-  //   .then(res => res.json())
-  //   .then((newEntry) => {
-  //     document.body.insertAdjacentHTML('beforeend', newEntry.data.content);
-  // });  
+    fetch('api/entry', postOptions)
+    .then(res => res.json())
+    .then((newEntry) => {
+      document.body.insertAdjacentHTML('title', newEntry.data.title);
+      document.body.insertAdjacentHTML('content', newEntry.data.content);
+      document.body.insertAdjacentHTML('createdBy', newEntry.data.createdBy);
+      document.body.insertAdjacentHTML('createdAt', newEntry.data.createdAt);
+  });  
 } 
 
-var saveBtn = document.getElementById("saveEntry");
-saveBtn.addEventListener("click", function(evt){
-  console.log("SAVED");
-  insertNewEntry();
-  evt.preventDefault();
-});
+    var saveBtn = document.getElementById("saveEntry");
+    saveBtn.addEventListener("click", function(evt){
+      console.log("SAVED");  
+      evt.preventDefault();
+      insertNewEntry();
+      window.location.reload(false);   
+    });
 
+    /************************************************************ */
+  /**UPDATE ENTRY ***********************************************/
 
+  function updateEntry() {
+        
+    const formData = new FormData();
+    let updateEntryId = document.getElementById("update_entry_id").value;
+    formData.append('entryID', updateEntryId);
+    let title = document.getElementById("entry_title").value;
+    formData.append('title', title);
+    let entryContent = document.getElementById("content_entry").value;
+    formData.append('content', entryContent);
+    let entryCreatedBy = document.getElementById("entry_created_by").value;
+    formData.append('createdBy', entryCreatedBy);
+    let entryDate = document.getElementById("entry_created_at").value;
+    formData.append('createdAt', entryDate);
+
+    console.log(updateEntryId, title, entryContent, entryCreatedBy, entryDate);
+    
+    let url = "api/entry/" + updateEntryId;
+    fetch(url, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'PATCH',                                                              
+      body: JSON.stringify({
+        'title': title,
+        'content': entryContent,
+        'createdBy': entryCreatedBy,
+        'createdAt': entryDate} )                                        
+    })
+
+  }
+
+  var updateBtn = document.getElementById("updateEntry");
+  updateBtn.addEventListener("click", function(evt){
+      console.log("UPDATED");  
+      evt.preventDefault();
+      updateEntry();
+      window.location.reload(false);   
+    });
+
+  
 
 
   /****************************************************************************************** */

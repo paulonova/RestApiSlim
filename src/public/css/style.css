@@ -25,6 +25,11 @@ a{
   color: whitesmoke;
 }
 
+a:hover{
+  color: whitesmoke;
+  font-weight: bolder;
+}
+
 p.mb-1{
   color: whitesmoke;
   font-weight: bold;

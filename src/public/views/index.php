@@ -95,7 +95,7 @@
         <div id="only_one" class="hidden list-group"> 
             <a href="#" class="list-group-item card-content list-group-item-action flex-column align-items-start active">
                 <div class="d-flex w-100 justify-content-between">
-                    <h3 id="entry_title" class="mb-1">List group item heading</h3>
+                    <h3 id="comment" class="mb-1">List group item heading</h3>
                     <small id="entry_date">3 days ago</small>
                     <small id="entry_id">Entry id</small>
                 </div>
@@ -107,7 +107,7 @@
 
     </section> <!-- Show a single entry -->
 
-    <section class="jornal_form"> <!-- Section Journal Entries -->
+    <section class="jornal_form"> <!-- Section CREATE ENTRY -->
         <h2 class="saved_articles">Create Entry</h2>
         <form >
             <!-- Title -->
@@ -115,20 +115,21 @@
                     placeholder="Title.." required autofocus> <!-- Title -->
 
             <!-- Id to update entry -->     
-            <input id="entry_id" class="form-control" name="getOnlyOne" placeholder="Entry id only to update.."
-                                type="number" value="" min="1" disabled required autofocus>            
+            <input id="update_entry_id" class="form-control" name="getOnlyOne" 
+                                placeholder="&#9755; Insert entryID only to update!"
+                                type="number"  min="1"  required autofocus>            
 
             <!-- content -->
-            <textarea id="entry_content" class="form-control" name="journal_area"  
+            <textarea id="content_entry" class="form-control" name="journal_area"  
                     placeholder="Write yor story here.." rows="4" required autofocus></textarea>  <!-- Journal annotation -->
 
             <!-- Created By user id -->     
-            <input id="created_by" class="form-control" name="getOnlyOne" placeholder="Created by userId"
-                                type="number" value="" min="1" required autofocus>
+            <input id="entry_created_by" class="form-control" name="getOnlyOne" placeholder="Created by userId"
+                                type="number"  min="1" required autofocus>
 
             <!-- Date -->
             <input id="entry_created_at" type="date" class="form-control" name="entry_created_at" 
-                        value="" required autofocus/>  <!-- Date -->            
+                         required autofocus/>  <!-- Date -->            
 
             <div class="signin_btn"> <!-- Save/update button -->
                 <input id="updateEntry" class="btn btn-warning" name="update" value="Update" type="submit">
@@ -145,7 +146,7 @@
                 <input id="comm_entry_id" class="form-control" name="entry-id" placeholder="insert entry id"
                                 type="number" value="" min="1" required autofocus>
                 <!-- Ceated  by -->     
-                <input id="comm_created_by" class="form-control" name="created-by" placeholder="Created by"
+                <input id="comm_created_by" class="form-control" name="comm_created_by" placeholder="Created by"
                                 type="number" value="" min="1" required autofocus>
                 <!-- Created at -->
                 <input id="comm_created_at" type="date" class="form-control" name="created-at" 
@@ -156,7 +157,7 @@
 
             </div>
         </form>
-    </section><!-- Section Entries -->
+    </section><!-- Section CREATE ENTRY -->
     <hr>
 
     <!-- Show all Comments -->
