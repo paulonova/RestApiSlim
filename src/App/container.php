@@ -74,4 +74,14 @@ $container['blog'] = function ($c) {
     return $blogController;
 };
 
+$container['comments'] = function ($c) {
+    $commentsController = new \App\Controllers\CommentsController($c->get('db'));
+    return $commentsController;
+};
+
+$container['users'] = function ($c) {
+    $usersController = new \App\Controllers\Userscontroller($c->get('db'));
+    return $usersController;
+};
+
 return $container;

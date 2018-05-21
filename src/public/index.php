@@ -106,12 +106,53 @@ $app->group('/api', function () use ($app) {
     $app->get('/comments/{id}', function ($request, $response, $args){
 
         $id = $args['id'];
-        $comment = $this->blog->getOneComments($id);
+        $comment = $this->comments->getOneComments($id);
         return $response->withJson(['data' => $comment]);
 
     });
 
+    $app->get('/comments', function ($request, $response, $args) {
+        $allComments = $this->comments->getAllComments();
+        
+        return $response->withJson(['data' => $allComments]);
+    });
 
+    $app->post('/comments', function ($request, $response, $args) {
+    
+        $body = $request->getParsedBody();
+        $comment = $this->comments->addComment($body);
+        return $response->withJson(['data' => $comment]);
+    });
+
+    /**DELETE COMMENT ****************************************** */
+    $app->delete('/comments/{id}', function ($request, $response, $args) {       
+
+        try{
+            $id = $args['id'];
+            $singleEntry = $this->comments->deleteComment($id);
+            return $response->withJson(['data' => true]);
+        }catch(PDOException $e){
+            return $response->withJson(['data' => false]);
+            echo $e->getMessage();
+        }        
+    });
+
+
+
+    /**USERS ****************************************** */
+    $app->get('/users/{id}', function ($request, $response, $args){
+
+        $id = $args['id'];
+        $user = $this->users->getOneUser($id);
+        return $response->withJson(['data' => $user]);
+
+    });
+
+    $app->get('/users', function ($request, $response, $args) {
+        $allUsers = $this->users->getAllUsers();
+        
+        return $response->withJson(['data' => $allUsers]);
+    });
 
 
 

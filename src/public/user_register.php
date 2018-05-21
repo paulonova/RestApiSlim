@@ -16,12 +16,13 @@ $pdo = new PDO(
 
 $hashed = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
-$statement = $pdo->prepare("INSERT INTO users (username, password)
-                            VALUES (:username, :password)"
+$statement = $pdo->prepare("INSERT INTO users (username, password, createdAt)
+                            VALUES (:username, :password, :createdAt)"
 );
 $statement_status =  $statement->execute([
   ":username" => $_POST["username"], 
-  ":password" => $hashed
+  ":password" => $hashed,
+  ":createdAt" => $_POST["reg_created_at"]
 ]);
 
 if($statement_status){

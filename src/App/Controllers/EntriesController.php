@@ -23,6 +23,7 @@ class EntriesController{
         return $getOne->fetch();
     }
 
+    
     public function add($blog){
 
         $addOne = $this->db->prepare('INSERT INTO entries (title, content, createdBy, createdAt) 

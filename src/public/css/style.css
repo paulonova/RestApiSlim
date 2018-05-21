@@ -19,6 +19,7 @@ body{
 a.card-content{
   background-color: rgb(99, 99, 99);
   margin: 10px;
+  color: whitesmoke;
 }
 
 a{
@@ -53,6 +54,7 @@ h3.mb-1{
 
 small{
   font-style: italic;
+  color: orange;
 }
 
 .comment-detail{
@@ -141,6 +143,14 @@ button, input[type='submit']{
 input{
   margin-top: 10px;
 }
+
+/* Search container */
+.search_title{
+  width: 90%;
+  margin: 0 auto;
+}
+
+
 
 
 @media (min-width: 768px) and (max-width: 1450px){

@@ -87,15 +87,15 @@
     <hr>
     
     <section class="alert alert-success"> <!-- Show a single entry -->
-        <label for="getOnlyOne">Hämta ut ett enskilt specifikt inlägg:</label>
+        <h4 for="getOnlyOne">Hämta ut ett enskilt specifikt inlägg:</h4>
         <input id="getOnlyOne" class="form-control" name="getOnlyOne" type="number" value="1" min="1">
         <input id="oneBtn" type="button" class="btn btn-success" value="get only one" >
         <br><br>  
-
+        
         <div id="only_one" class="hidden list-group"> 
-            <a href="#" class="list-group-item card-content list-group-item-action flex-column align-items-start active">
+            <a class="list-group-item card-content list-group-item-action flex-column align-items-start active">
                 <div class="d-flex w-100 justify-content-between">
-                    <h3 id="comment" class="mb-1">List group item heading</h3>
+                    <h3 id="title" class="mb-1">List group item heading</h3>
                     <small id="entry_date">3 days ago</small>
                     <small id="entry_id">Entry id</small>
                 </div>
@@ -152,7 +152,7 @@
                 <input id="comm_created_at" type="date" class="form-control" name="created-at" 
                         value="" required autofocus/>  <!-- Date -->  
                 <div class="signin_btn"> <!-- Save/update button -->
-                    <input id="saveEntry" class="btn btn-lg btn-primary" name="save" value="Save Comment" type="submit"> 
+                    <input id="saveComment" class="btn btn-lg btn-primary" name="save" value="Save Comment" type="submit"> 
                 </div> <!-- Save Comments -->               
 
             </div>
@@ -160,8 +160,22 @@
     </section><!-- Section CREATE ENTRY -->
     <hr>
 
+    <h4 class="alert alert-success">Sök inlägg via 'Titel'</h4>
+    <section class="search_title">        
+        <form class="form-control">
+            <input id="search_title" class="form-control input-group mb-3" type="search" placeholder="Search" aria-label="Search">
+            <button id="search_btn" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>    
+    </section>
+    <div id="search_container" class="search_container">
+
+    </div>
+    
+
+    <hr>
+
     <!-- Show all Comments -->
-    <h2 class="alert alert-success">Show all Comments</h2>
+    <h4 class="alert alert-success">De 20 senaste commentarerna</h4>
     <section id="comment_container" class="comment-container"></section>
         
     <br>

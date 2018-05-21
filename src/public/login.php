@@ -25,6 +25,7 @@ if(password_verify($_POST["password"], $user["password"])){
     $_SESSION["loggedIn"] = true;
     $_SESSION["username"] = $user["username"];
     $_SESSION["user_id"] = $user["userID"];
+    $_SESSION["createdAt"] = $user["createdAt"];
 
 }else{
     header('Location: ./views/login_view.php?message=login failed');

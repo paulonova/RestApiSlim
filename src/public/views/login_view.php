@@ -67,6 +67,9 @@
             <input type="text" name ="username" id="username" class="form-control" placeholder="Username" required autofocus>
             <label for="password" class="sr-only">Password</label>
             <input type="password" name="password" id="reg_password" class="form-control" placeholder="Password" required>
+            <!-- Date -->
+            <input id="reg_created_at" type="date" class="form-control" name="reg_created_at" 
+                         required autofocus/>  <!-- Date -->  
 
             <div class="register_btn">
                 <input class="btn btn-lg btn-primary" value="Register" type="submit">
