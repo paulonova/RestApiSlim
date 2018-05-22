@@ -248,41 +248,71 @@ saveComment.addEventListener("click", function(evt){
 
   /***************NOT WORKING ********************************************** */
   /**SEARCH FOR ENTRIES BY TITLE *********************************************/
+
+    /**This function populate a Card in html with onnly one entry */
+  function getentryByTitle(entryID, title, date, content, createdBy){  
+    var container = document.getElementById("search-container");
+    container.removeAttribute("class", "hidden");    
+    document.getElementById("search-title").innerHTML=title;
+    document.getElementById("search-entry-date").innerHTML=date;
+    document.getElementById("search-entry-id").innerHTML="Entry id: " + entryID;
+    document.getElementById("search-entry-comment").innerHTML=content;
+    document.getElementById("search-created-by").innerHTML="Created by id:" + createdBy;    
+
+  }
+
   async function searchByTitle() {
 
-    let search = document.getElementById("search_title").value;
-
-    console.log("Search: " + search);
+    search = document.getElementById("search_title").value;
+    let titles = [];
 
     const response = await fetch('api/entries');
     const { data } = await response.json();
     
     for (const resource of data) {
-
-      console.log("Titles: " + resource.title);
+        console.log("Titles: " + resource.title);
+        
         var date = resource .createdAt.split(" ");
-        createElementCards(
-            "search-container",
-            resource.entryID,
-            resource.title,
-            resource.content,
-            date[0],
-            resource.createdBy
-        );             
-    }    
+        titles.push(resource.title);
+        let result = titles.filter(word => word == search);        
+        console.log("Search result: " + result);
+        if(result == search && result != ""){
+            getentryByTitle(
+              resource.entryID,
+              resource.title,
+              date[0],
+              resource.content,            
+              resource.createdBy
+          );   
+          break;  
+        } else{
+          var container = document.getElementById("search-container");
+          container.setAttribute("class", "hidden");    
+          console.log("Search result: FALSE");
+        }    
+    }
+    console.log("Titles: " + titles.length);
   }
+
+  /**Button to hidde searched Entry */
+  var hiddeSearch = document.getElementById("search-hidde-entry");
+    hiddeSearch.addEventListener("click", function(evt){
+      var container = document.getElementById("search-container");
+      container.setAttribute("class", "hidden");
+      evt.preventDefault();
+    });
 
   /**Button to search entry by title*/
   var searchButton = document.getElementById("search_btn");
   searchButton.addEventListener("click", function(){
-    console.log("SEARCH");
+    console.log("SEARCH");    
     searchByTitle();
-    // alert("BLA");
+    document.getElementById("search_title").value="";
   });
 
   
   /************************************************************ */
-  /**SELECT a single entry **************************************/
+  /**SELECT A SINGLE ENTRY **************************************/
     async function getSingleEntry(id) {
       let url = "api/entries/" + id;
       const response = await fetch(url);
@@ -310,8 +340,8 @@ saveComment.addEventListener("click", function(evt){
   }
 
   /**Button to hidde the single Entry */
-  var hiddeOne = document.getElementById("hidde_one");
-    hiddeOne.addEventListener("click", function(evt){
+  var hiddesearch = document.getElementById("hidde_one");
+    hiddesearch.addEventListener("click", function(evt){
       var container = document.getElementById("only_one");
       container.setAttribute("class", "hidden");
       evt.preventDefault();

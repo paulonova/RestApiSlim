@@ -163,13 +163,26 @@
     <h4 class="alert alert-success">Sök inlägg via 'Titel'</h4>
     <section class="search_title">        
         <form class="form-control">
-            <input id="search_title" class="form-control input-group mb-3" type="search" placeholder="Search" aria-label="Search">
+            <input id="search_title" onfocus="this.value=''" class="form-control input-group mb-3" type="search" 
+                                    placeholder="Search" aria-label="Search">
             <button id="search_btn" class="btn btn-outline-success my-2 my-sm-0" type="button">Search</button>
         </form>    
     </section>
-    <div id="search-container" class="search_container">
 
-    </div>
+    
+    <!-- Section SEARCH ENTRY BY TITLE -->
+    <section id="search-container" class="search_container list-group hidden">
+        <a class="list-group-item card-content list-group-item-action flex-column align-items-start active">
+            <div class="d-flex w-100 justify-content-between">
+                <h3 id="search-title" class="mb-1">List group item heading</h3>
+                <small id="search-entry-date">3 days ago</small>
+                <small id="search-entry-id">Entry id</small>
+            </div>
+            <p id="search-entry-comment" class="mb-1">Donec id elit non mi porta gravida at eget metus.</p>
+            <small id="search-created-by">Created by:</small>
+            <button id="search-hidde-entry" class="btn btn-success">Hidde</button>
+        </a>         
+    </section> <!-- Section SEARCH ENTRY BY TITLE -->
     
 
     <hr>
