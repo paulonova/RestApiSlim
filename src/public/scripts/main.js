@@ -262,7 +262,7 @@ saveComment.addEventListener("click", function(evt){
       console.log("Titles: " + resource.title);
         var date = resource .createdAt.split(" ");
         createElementCards(
-            "search_container",
+            "search-container",
             resource.entryID,
             resource.title,
             resource.content,
@@ -277,7 +277,7 @@ saveComment.addEventListener("click", function(evt){
   searchButton.addEventListener("click", function(){
     console.log("SEARCH");
     searchByTitle();
-    alert("BLA");
+    // alert("BLA");
   });
 
   
@@ -393,9 +393,9 @@ async function getSingleEntry(id) {
       window.location.reload(false);   
     });
 
+
   /************************************************************ */
   /**UPDATE ENTRY ***********************************************/
-
   function updateEntry() {
         
     const formData = new FormData();
@@ -448,25 +448,7 @@ async function getSingleEntry(id) {
       .then(console.log);
   }
   
-  function postTodo(){
-    // x-www-form-urlencoded
-    const formData = new FormData();
-    const todoInput = document.getElementById('todoInput');
-    formData.append('content', todoInput.value);
   
-    const postOptions = {
-      method: 'POST',
-      body: formData,
-      //VERY IMPORTANT
-      credentials: 'include'
-    }
-  
-    fetch('api/todos', postOptions)
-      .then(res => res.json())
-      .then((newTodo) => {
-          document.body.insertAdjacentHTML('beforeend', newTodo.data.content);
-      });
-  }
   
 
   

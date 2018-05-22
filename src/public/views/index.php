@@ -74,7 +74,7 @@
 
 <?php if (isset($_SESSION["loggedIn"])): ?>
 
-    <h4 class="welcome_user">Welcome <?php echo $_SESSION["username"]?></h4>
+    <h4 class="welcome_user">Welcome <?php echo $_SESSION["username"] . " ID: " . $_SESSION["user_id"]?></h4>
     <hr>
     
     <div class="alert alert-success"> <!-- the green header -->
@@ -164,10 +164,10 @@
     <section class="search_title">        
         <form class="form-control">
             <input id="search_title" class="form-control input-group mb-3" type="search" placeholder="Search" aria-label="Search">
-            <button id="search_btn" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <button id="search_btn" class="btn btn-outline-success my-2 my-sm-0" type="button">Search</button>
         </form>    
     </section>
-    <div id="search_container" class="search_container">
+    <div id="search-container" class="search_container">
 
     </div>
     
