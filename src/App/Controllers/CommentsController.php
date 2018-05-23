@@ -18,9 +18,15 @@ class CommentsController{
 
     
     public function getOneComments($id){
-        $getOneComment = $this->db->prepare("SELECT * FROM comments WHERE entryID = :id");
+        $getOneComment = $this->db->prepare("SELECT * FROM comments WHERE commentID = :id");
         $getOneComment->execute([":id" => $id]);
         return $getOneComment->fetch();
+    }
+
+    public function getAllCommentsByEntryId($id){
+        $getAllComment = $this->db->prepare("SELECT * FROM comments WHERE entryID = :id");
+        $getAllComment->execute([":id" => $id]);
+        return $getAllComment->fetchAll();
     }
 
     public function addComment($comments){

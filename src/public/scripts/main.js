@@ -1,4 +1,15 @@
 
+/****************************************************** */
+//UTILITIES
+/****************************************************** */
+
+function errorMessage(msg, element){
+  
+    document.getElementById(element).innerHTML = msg;
+
+}
+
+
 
 /****************************************************** */
 //GET ENTRIES
@@ -72,89 +83,230 @@ function createElementCards(elementId, entryID, title, content, createdAt, creat
 
 }
 
+/**SELECT all Entries *********************************************/
+async function getAllEntries() {
+  const response = await fetch('api/entries');
+  const { data } = await response.json();
+  
+  for (const resource  of data) {
+      var date = resource .createdAt.split(" ");
+      createElementCards(
+          "container",
+          resource.entryID,
+          resource.title,
+          resource.content,
+          date[0],
+          resource.createdBy
+      );    
+  }    
+}
+getAllEntries();
+
 /****************************************************** */
 //GET COMMENTS
 /****************************************************** */
 
-populateComments();
-function createCommentCards(commentId, entryId, comment, createdBy, createdAt){
 
-    //Containers
-    let commentContainer = document.getElementById("comment_container");
+function createCommentCards(element, commentId, entryId, comment, createdBy, createdAt){
 
-    let commentCard = document.createElement("DIV");
-    commentCard.setAttribute("class", "card comment-card");
-    commentCard.setAttribute("id", "comment_card");
+  //Containers
+  let commentContainer = document.getElementById(element);
 
-    let commentBody = document.createElement("DIV");
-    commentBody.setAttribute("class", "card-body comment-body");
-    commentBody.setAttribute("id", "comment_body");
-    commentCard.appendChild(commentBody);
+  let commentCard = document.createElement("DIV");
+  commentCard.setAttribute("class", "card comment-card");
+  commentCard.setAttribute("id", "comment_card");
 
-    var commentDetail = document.createElement("DIV");
-    commentDetail.setAttribute("class", "comment-detail");
-    commentDetail.setAttribute("id", "comment_detail");
-    commentBody.appendChild(commentDetail);
+  let commentBody = document.createElement("DIV");
+  commentBody.setAttribute("class", "card-body comment-body");
+  commentBody.setAttribute("id", "comment_body");
+  commentCard.appendChild(commentBody);
+
+  var commentDetail = document.createElement("DIV");
+  commentDetail.setAttribute("class", "comment-detail");
+  commentDetail.setAttribute("id", "comment_detail");
+  commentBody.appendChild(commentDetail);
 
 
-    // Comment
-    let smallcomment = document.createElement("P");
-    smallcomment.setAttribute("id", "comment");
-    smallcomment.setAttribute("class", "mb-1");
-    let smallComText = document.createTextNode(comment);
-    smallcomment.appendChild(smallComText);
-    commentBody.appendChild(smallcomment);
-    commentContainer.appendChild(commentCard);  
+  // Comment
+  let smallcomment = document.createElement("P");
+  smallcomment.setAttribute("id", "comment");
+  smallcomment.setAttribute("class", "mb-1");
+  let smallComText = document.createTextNode(comment);
+  smallcomment.appendChild(smallComText);
+  commentBody.appendChild(smallcomment);
+  commentContainer.appendChild(commentCard);  
 
-    //Comment Id
-    let comment_id = document.createElement("SMALL");
-    comment_id.setAttribute("id", "comment_id");
-    let commIdText = document.createTextNode("Comment Id: " + commentId);
-    comment_id.appendChild(commIdText);
-    commentDetail.appendChild(comment_id);
+  //Comment Id
+  let comment_id = document.createElement("SMALL");
+  comment_id.setAttribute("id", "comment_id");
+  let commIdText = document.createTextNode("Comment Id: " + commentId);
+  comment_id.appendChild(commIdText);
+  commentDetail.appendChild(comment_id);
 
-    //Entry Id
-    let entry_id = document.createElement("SMALL");
-    entry_id.setAttribute("id", "comment_entry_id");
-    let entryText = document.createTextNode("Entry id: " + entryId);
-    entry_id.appendChild(entryText);
-    commentDetail.appendChild(entry_id);
+  //Entry Id
+  let entry_id = document.createElement("SMALL");
+  entry_id.setAttribute("id", "comment_entry_id");
+  let entryText = document.createTextNode("Entry id: " + entryId);
+  entry_id.appendChild(entryText);
+  commentDetail.appendChild(entry_id);
 
-    //Created by
-    let smallBy = document.createElement("SMALL");
-    smallBy.setAttribute("id", "comment_created_by");
-    let smallByText = document.createTextNode("Created by: " + createdBy);
-    smallBy.appendChild(smallByText);
-    commentDetail.appendChild(smallBy);
-    
-    //Created at
-    let smallAt = document.createElement("SMALL");
-    smallAt.setAttribute("id", "comment_created_at");
-    let smallAtText = document.createTextNode("Created at: " + createdAt);
-    smallAt.appendChild(smallAtText);
-    commentDetail.appendChild(smallAt);
+  //Created by
+  let smallBy = document.createElement("SMALL");
+  smallBy.setAttribute("id", "comment_created_by");
+  let smallByText = document.createTextNode("Created by: " + createdBy);
+  smallBy.appendChild(smallByText);
+  commentDetail.appendChild(smallBy);
+  
+  //Created at
+  let smallAt = document.createElement("SMALL");
+  smallAt.setAttribute("id", "comment_created_at");
+  let smallAtText = document.createTextNode("Created at: " + createdAt);
+  smallAt.appendChild(smallAtText);
+  commentDetail.appendChild(smallAt);
 
-    //Delete button
-    let delBtn = document.createElement("BUTTON");
-    delBtn.setAttribute("class", "btn btn-success");
-    delBtn.setAttribute("id", "commentDeleteBtn");
-    let delText = document.createTextNode("Delete");
-    delBtn.appendChild(delText);
-    commentBody.appendChild(delBtn);
+  if(element == "comment_container"){
+      //Delete button
+      let delBtn = document.createElement("BUTTON");
+      delBtn.setAttribute("class", "btn btn-success");
+      delBtn.setAttribute("id", "commentDeleteBtn");
+      let delText = document.createTextNode("Delete");
+      delBtn.appendChild(delText);
+      commentBody.appendChild(delBtn);
 
-    delBtn.addEventListener("click", function(evt){
-    console.log(commentId);
-    deleteComment(commentId);
-    evt.preventDefault();
-  });   
+      delBtn.addEventListener("click", function(evt){
+      console.log(commentId);
+      deleteComment(commentId);
+      evt.preventDefault();
+    });   
+  }
+  
 
 }
 
+
+
+function createCommentsByCommentIDAndEntryID(element, commentId, entryId, comment, createdBy, createdAt){
+    
+    
+    if(element == "set-comments"){
+
+      document.getElementById("set-comments").removeAttribute("class", "hidden");
+      document.getElementById("set-entryid").setAttribute("class", "hidden");
+      document.getElementById("comment_id").innerHTML="Comment id: " + commentId;
+      document.getElementById("comment_entry_id").innerHTML="Entry id: " + entryId;
+      document.getElementById("comment_created_by").innerHTML="Created by: " + createdBy;
+      document.getElementById("comment_created_at").innerHTML="Created at: " + createdAt;
+      document.getElementById("comment").innerHTML=comment;     
+            
+  }
+
+    if(element == "set-entryid"){
+
+      console.log("comment_container ..");
+      document.getElementById("set-comments").setAttribute("class", "hidden");
+      document.getElementById("set-entryid").removeAttribute("class", "hidden");
+
+      createCommentCards("set-entryid", commentId, entryId, comment, createdBy, createdAt);
+  }   
+
+}
+
+
 /************************************************************ */
-  /**DELETE COMMENTS ******************************************/
+/**COMMENTS BY COMMENT-ID AND COMMENTS BY ENTRY-ID************************/
+
+async function getSingleCommandsById(){
+  let getId = document.getElementById("get-commentId").value;
+  let url = "api/comment/" + getId;
+
+  const response = await fetch(url);
+  const { data } = await response.json();
+
+  if(data == ""){
+    console.log("Is data: false");
+    document.getElementById("set-comments").setAttribute("class", "hidden");
+    document.getElementById("errorComment").removeAttribute("class", "hidden");
+    errorMessage("No Comments with this commentID.", "errorComment");
+  }else{
+    console.log("Is data: true");
+    var date = data.createdAt.split(" ");
+    createCommentsByCommentIDAndEntryID(
+        "set-comments", 
+        data.commentID, 
+        data.entryID, 
+        data.content, 
+        data.createdBy, 
+        date[0]
+      );
+  }  
+}
+
+
+async function getCommandsByEntryId(){
+  let getId = document.getElementById("get-commentId").value;
+  let url = "api/comments/" + getId;
+
+  const response = await fetch(url);
+  const { data } = await response.json();  
+
+  if(data == ""){
+    console.log("Is data: false");
+    document.getElementById("set-entryid").setAttribute("class", "hidden");
+    document.getElementById("errorComment").removeAttribute("class", "hidden");
+    errorMessage("No Comments with this entryID.", "errorComment");
+  }else{
+    console.log("Is data: true");
+    for (let resource of data) {
+      let date = resource.createdAt.split(" ");
+      createCommentCards(
+            "set-entryid", 
+            resource.commentID, 
+            resource.entryID, 
+            resource.content, 
+            resource.createdBy, 
+           date[0]
+          );
+      }
+  }
+}
+
+/**Button to get Comment by commentID */
+var commentByIdBtn = document.getElementById("getSingleCommentBtn");
+commentByIdBtn.addEventListener("click", function(evt){  
+  document.getElementById("set-comments").removeAttribute("class", "hidden");    
+    getSingleCommandsById();
+    evt.preventDefault();
+    document.getElementById("errorComment").setAttribute("class", "hidden");
+    // window.location.reload(false);  
+})
+
+/**Button to get Comment by entryID */
+var commentByEntryIdBtn = document.getElementById("getAllCommentsBtn");
+commentByEntryIdBtn.addEventListener("click", function(evt){
+    document.getElementById("set-entryid").removeAttribute("class", "hidden");  
+    getCommandsByEntryId();
+    evt.preventDefault();
+    document.getElementById("errorComment").setAttribute("class", "hidden");
+    // window.location.reload(false);  
+})
+
+/**Button to hidde all comments */
+var hiddeAllComments = document.getElementById("hiddeAll");
+hiddeAllComments.addEventListener("click", function(evt){    
+    document.getElementById("set-comments").setAttribute("class", "hidden");
+    document.getElementById("set-entryid").setAttribute("class", "hidden");
+    document.getElementById("errorComment").setAttribute("class", "hidden");
+    evt.preventDefault();
+    window.location.reload(false);  
+})
+
+
+
+/************************************************************ */
+/**DELETE COMMENTS ******************************************/
   async function deleteComment(id){
     console.log(id);
-    let url = "api/comments/" + id;
+    let url = "api/comments/delete/" + id;
     console.log(url);
     fetch(url, {
       method: 'DELETE'
@@ -162,14 +314,15 @@ function createCommentCards(commentId, entryId, comment, createdBy, createdAt){
     window.location.reload(false);      
   }
 
+populateComments();
 async function populateComments(){
 
   const response = await fetch('api/comments');
   const { data } = await response.json();
   for (const resource of data){
     var date = resource.createdAt.split(" ");
-    // createCommentCards(commentId, entryId, comment, createdBy, createdAt)
     createCommentCards(
+      "comment_container",
       resource.commentID,
       resource.entryID,
       resource.content,
@@ -221,32 +374,7 @@ saveComment.addEventListener("click", function(evt){
 });
 
 
-
-
-  /************************************************************ */
-  /**SELECT all Entries *********************************************/
-    async function getAllEntries() {
-      const response = await fetch('api/entries');
-      const { data } = await response.json();
-      
-      console.log(date)
-      for (const resource  of data) {
-          var date = resource .createdAt.split(" ");
-          createElementCards(
-              "container",
-              resource.entryID,
-              resource.title,
-              resource.content,
-              date[0],
-              resource.createdBy
-          );    
-      }    
-    }
-    getAllEntries();
-
-
-
-  /***************NOT WORKING ********************************************** */
+  /************************************************************************* */
   /**SEARCH FOR ENTRIES BY TITLE *********************************************/
 
     /**This function populate a Card in html with onnly one entry */
@@ -262,20 +390,15 @@ saveComment.addEventListener("click", function(evt){
   }
 
   async function searchByTitle() {
-
     search = document.getElementById("search_title").value;
     let titles = [];
-
     const response = await fetch('api/entries');
     const { data } = await response.json();
     
-    for (const resource of data) {
-        console.log("Titles: " + resource.title);
-        
+    for (const resource of data) {       
         var date = resource .createdAt.split(" ");
         titles.push(resource.title);
-        let result = titles.filter(word => word == search);        
-        console.log("Search result: " + result);
+        let result = titles.filter(word => word == search);
         if(result == search && result != ""){
             getentryByTitle(
               resource.entryID,
@@ -291,7 +414,6 @@ saveComment.addEventListener("click", function(evt){
           console.log("Search result: FALSE");
         }    
     }
-    console.log("Titles: " + titles.length);
   }
 
   /**Button to hidde searched Entry */
@@ -410,9 +532,7 @@ async function getSingleEntry(id) {
       document.body.insertAdjacentHTML('content', newEntry.data.content     );
       document.body.insertAdjacentHTML('createdBy', newEntry.data.createdBy );
       document.body.insertAdjacentHTML('createdAt', newEntry.data.createdAt );
-  });  
-
-  
+  });   
 } 
 
     var saveBtn = document.getElementById("saveEntry");
@@ -467,16 +587,53 @@ async function getSingleEntry(id) {
     });
 
   
+    /************************************************************************* */
+    /**GET ALL USERS *********************************************/
 
+    function createAllUsers(userId, userName, userCreated){
 
-  /****************************************************************************************** */
+      let container = document.getElementById("user-body");
+      let usercontainer = document.createElement("TR");
+      container.appendChild(usercontainer);
 
-  
-  function getAllUsers(){
-    fetch('api/users')
-      .then(res => res.json())
-      .then(console.log);
-  }
+      console.log(userId, userName, userCreated);
+
+      //Username
+      let user_name = document.createElement("TD");
+      let userText = document.createTextNode(userName);
+      user_name.appendChild(userText);
+      usercontainer.appendChild(user_name);
+
+      //User id
+      let user_id = document.createElement("TD");
+      let idText = document.createTextNode(userId)
+      user_id.appendChild(idText);
+      usercontainer.appendChild(user_id);
+
+      let user_created = document.createElement("TD");
+      let createdText = document.createTextNode(userCreated);
+      user_created.appendChild(createdText);      
+      usercontainer.appendChild(user_created);
+
+    }
+
+    async function getAllUsers() {
+      console.log("01 ");
+      const response = await fetch('api/users');
+      const { data } = await response.json();
+      
+      console.log("02 ");
+      for (const resource  of data) {
+          var date = resource .createdAt.split(" ");
+          createAllUsers(
+              resource.userID,
+              resource.username,
+              date[0]
+          );    
+      }    
+    }
+    getAllUsers();
+    
   
   
   

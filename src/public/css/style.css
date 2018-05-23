@@ -64,6 +64,12 @@ small{
   justify-content: space-around;
 }
 
+.user_container{
+  width: 90%;
+  margin: 10px auto;
+  border: 2px solid rgb(145, 145, 145);
+  border-radius: 10px;
+}
 
 
 

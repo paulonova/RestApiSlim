@@ -104,8 +104,27 @@
                 <button id="hidde_one" class="btn btn-success">Hidde</button>
             </a>    
         </div> 
-
     </section> <!-- Show a single entry -->
+    <hr>
+
+    <!-- Show all Users -->
+    <h4 class="alert alert-warning">GET all users</h4>
+    <section class="user_container">
+
+         <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Username</th>
+                    <th scope="col">User id</th>
+                    <th scope="col">Created at</th>
+                </tr>
+            </thead>
+                <tbody id="user-body">
+                    <!-- Users info comes here.. -->
+                </tbody>
+        </table>
+    </section>
+    <hr>
 
     <section class="jornal_form"> <!-- Section CREATE ENTRY -->
         <h2 class="saved_articles">Create Entry</h2>
@@ -166,31 +185,65 @@
             <input id="search_title" onfocus="this.value=''" class="form-control input-group mb-3" type="search" 
                                     placeholder="Search" aria-label="Search">
             <button id="search_btn" class="btn btn-outline-success my-2 my-sm-0" type="button">Search</button>
-        </form>    
+        </form>
+
+        <!-- Section SEARCH ENTRY BY TITLE -->
+        <div id="search-container" class="search_container list-group hidden">
+            <a class="list-group-item card-content list-group-item-action flex-column align-items-start active">
+                <div class="d-flex w-100 justify-content-between">
+                    <h3 id="search-title" class="mb-1">List group item heading</h3>
+                    <small id="search-entry-date">3 days ago</small>
+                    <small id="search-entry-id">Entry id</small>
+                </div>
+                <p id="search-entry-comment" class="mb-1">Donec id elit non mi porta gravida at eget metus.</p>
+                <small id="search-created-by">Created by:</small>
+                <button id="search-hidde-entry" class="btn btn-success">Hidde</button>
+            </a>         
+        </div> <!-- Section SEARCH ENTRY BY TITLE -->           
     </section>
 
     
-    <!-- Section SEARCH ENTRY BY TITLE -->
-    <section id="search-container" class="search_container list-group hidden">
-        <a class="list-group-item card-content list-group-item-action flex-column align-items-start active">
-            <div class="d-flex w-100 justify-content-between">
-                <h3 id="search-title" class="mb-1">List group item heading</h3>
-                <small id="search-entry-date">3 days ago</small>
-                <small id="search-entry-id">Entry id</small>
-            </div>
-            <p id="search-entry-comment" class="mb-1">Donec id elit non mi porta gravida at eget metus.</p>
-            <small id="search-created-by">Created by:</small>
-            <button id="search-hidde-entry" class="btn btn-success">Hidde</button>
-        </a>         
-    </section> <!-- Section SEARCH ENTRY BY TITLE -->
+
+    <hr>
     
+    <section class="alert alert-success"> <!-- Show Comments -->
+        <h4>Hämta alla kommentarer från ett inlägg</h4>
+        <input id="get-commentId" class="form-control" name="getPostId" type="number" value="1" min="1">
+        <!-- By CommentID -->
+        <input id="getSingleCommentBtn" type="submit" class="btn btn-success" value="Get Single Comment by CommentID" >
+        <!-- By EntryID -->
+        <input id="getAllCommentsBtn" type="submit" class="btn btn-success" value="Get All Comments by EntryID" >
+        <!-- Hidde all -->
+        <input id="hiddeAll" type="submit" class="btn btn-warning" value="Hidde all" >
+        <br><br>  
+        
+        <div id="set-comments" class="list-group hidden"> 
+            <!-- Container to set Comment by commentID / only one -->
+            <div class= "card comment-card" id="comment_card">
+                <div class="card-body comment-body" id="comment_body">
+                    <div class="comment-detail" id="comment_detail">
+                        <small id="comment_id">Some text</small>
+                        <small id="comment_entry_id">Some text</small>
+                        <small id="comment_created_by">Some text</small>
+                        <small id="comment_created_at">Some text</small>
+                    </div>
+                        <p class="mb-1" id="comment">Some textSome textSome textSome text</p>
+                </div>           
+            </div>
+        </div>
+
+        <div id="errorComment" class="alert alert-danger hidden"></div> 
+
+        <!-- Container to set Comment by EnttryID / One or more -->
+        <div id="set-entryid" class="list-group "> </div> 
+    </section> <!-- Show Comments -->
 
     <hr>
 
     <!-- Show all Comments -->
     <h4 class="alert alert-success">De 20 senaste commentarerna</h4>
     <section id="comment_container" class="comment-container"></section>
-        
+       
     <br>
     <br>
     <br>

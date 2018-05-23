@@ -1,5 +1,6 @@
 <?php
 namespace App\Controllers;
+session_start();
 
 class EntriesController{
     private $db;

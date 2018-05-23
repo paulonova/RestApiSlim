@@ -102,21 +102,31 @@ $app->group('/api', function () use ($app) {
     });
 
 
-    /**COMMENTS ****************************************** */
-    $app->get('/comments/{id}', function ($request, $response, $args){
+    /**GET a single comment by ID ******************************** */
+    $app->get('/comment/{id}', function ($request, $response, $args){
 
         $id = $args['id'];
         $comment = $this->comments->getOneComments($id);
         return $response->withJson(['data' => $comment]);
 
     });
+    /**GET all comment by Entry ID */
+    $app->get('/comments/{id}', function ($request, $response, $args){
 
+        $id = $args['id'];
+        $comment = $this->comments->getAllCommentsByEntryId($id);
+        return $response->withJson(['data' => $comment]);
+
+    });
+
+    //All Comments
     $app->get('/comments', function ($request, $response, $args) {
         $allComments = $this->comments->getAllComments();
         
         return $response->withJson(['data' => $allComments]);
     });
 
+    //POST
     $app->post('/comments', function ($request, $response, $args) {
     
         $body = $request->getParsedBody();
@@ -125,7 +135,7 @@ $app->group('/api', function () use ($app) {
     });
 
     /**DELETE COMMENT ****************************************** */
-    $app->delete('/comments/{id}', function ($request, $response, $args) {       
+    $app->delete('/comments/delete/{id}', function ($request, $response, $args) {       
 
         try{
             $id = $args['id'];
@@ -148,6 +158,7 @@ $app->group('/api', function () use ($app) {
 
     });
 
+    //GET all users
     $app->get('/users', function ($request, $response, $args) {
         $allUsers = $this->users->getAllUsers();
         
