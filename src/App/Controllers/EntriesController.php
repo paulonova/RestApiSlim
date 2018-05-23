@@ -18,6 +18,13 @@ class EntriesController{
     }
 
     //Working
+    public function getFromUser($id){
+        $getOne = $this->db->prepare('SELECT * FROM entries WHERE createdBy = :id');
+        $getOne->execute([':id' => $id]);
+        return $getOne->fetchAll();
+    }
+
+    //Working
     public function getOne($id){
         $getOne = $this->db->prepare('SELECT * FROM entries WHERE entryID = :id');
         $getOne->execute([':id' => $id]);

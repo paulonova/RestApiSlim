@@ -87,7 +87,7 @@
     <hr>
     
     <section class="alert alert-success"> <!-- Show a single entry -->
-        <h4 for="getOnlyOne">Hämta ut ett enskilt specifikt inlägg:</h4>
+        <h4 for="getOnlyOne">Hämta ut ett specifikt inlägg via EntryID</h4>
         <input id="getOnlyOne" class="form-control" name="getOnlyOne" type="number" value="1" min="1">
         <input id="oneBtn" type="button" class="btn btn-success" value="get only one" >
         <br><br>  
@@ -103,7 +103,20 @@
                 <small id="created_by">Donec id elit non mi porta.</small>
                 <button id="hidde_one" class="btn btn-success">Hidde</button>
             </a>    
-        </div> 
+        </div>
+        <hr>
+        <!-- get all entries from a specific user -->
+        <h4 for="getFromUser">Hämta ut alla inlägg från en speecifik användare</h4>
+        <input id="getFromUser" class="form-control" name="getFromUser" type="number" value="1" min="1">
+        <input id="get-entries" type="button" class="btn btn-success" value="get entries" >
+        <input id="hiddeAll" type="button" class="btn btn-warning" value="Hidde all" >
+        <br><br>
+
+        <div id="errorEntriesContainer" class="form-control"></div>
+
+        <div id="getEntriesContainer" class="form-control">NEED TO FIX THIS..</div>
+
+
     </section> <!-- Show a single entry -->
     <hr>
 

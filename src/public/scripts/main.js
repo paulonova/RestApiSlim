@@ -4,7 +4,7 @@
 /****************************************************** */
 
 function errorMessage(msg, element){
-  
+
     document.getElementById(element).innerHTML = msg;
 
 }
@@ -184,7 +184,6 @@ function createCommentCards(element, commentId, entryId, comment, createdBy, cre
 }
 
 
-
 function createCommentsByCommentIDAndEntryID(element, commentId, entryId, comment, createdBy, createdAt){
     
     
@@ -210,6 +209,51 @@ function createCommentsByCommentIDAndEntryID(element, commentId, entryId, commen
   }   
 
 }
+
+
+/**GET ENTRIES FROM A USER ************************/
+async function getEntriesFromUser(){
+  let getId = document.getElementById("getFromUser").value;
+  let url = "api/entris/user/" + getId;
+
+  const response = await fetch(url);
+  const { data } = await response.json();
+
+  if(data == ""){
+    console.log("Is data: false");
+    // document.getElementById("set-comments").setAttribute("class", "hidden");
+    // document.getElementById("errorComment").removeAttribute("class", "hidden");
+    errorMessage("No Comments with this commentID.", "errorEntriesContainer");
+  }else{
+    console.log("Is data: true");
+    for (const resource  of data) {
+      var date = resource .createdAt.split(" ");
+      createElementCards(
+          "getEntriesContainer",
+          resource.entryID,
+          resource.title,
+          resource.content,
+          date[0],
+          resource.createdBy
+      );    
+    } 
+  }  
+}
+
+var getEntriesBtn = documment.getElementById("get-entries");
+getEntriesBtn.addEventListener("click", function(evt){
+  getEntriesFromUser();
+  evt.preventDefault();
+
+})
+
+var hiddeGetEnriesBtn = documment.getElementById("hiddeAll");
+hiddeGetEnriesBtn.addEventListener("click", function(evt){
+  evt.preventDefault();
+
+})
+
+
 
 
 /************************************************************ */

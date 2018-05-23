@@ -48,33 +48,27 @@ $app->group('/api', function () use ($app) {
     // GET http://localhost:XXXX/api/todos
     $app->get('/entries', function ($request, $response, $args) {
         $allEntries = $this->blog->getAll();
-        /**
-         * Wrapping the data when returning as a safety thing
-         * https://www.owasp.org/index.php/AJAX_Security_Cheat_Sheet#Server_Side
-         */
         return $response->withJson(['data' => $allEntries]);
     });
 
     // GET http://localhost:XXXX/api/todos/5
     $app->get('/entries/{id}', function ($request, $response, $args) {
-        /**
-         * {id} is a placeholder for whatever you write after todos. So if we write
-         * /todos/4 the {id} will be 4. This gets saved in the $args array
-         * $args['id'] === 4
-         * The name inside of '$args' must match the placeholder in the url
-         * https://www.slimframework.com/docs/v3/objects/router.html#route-placeholders
-         */
+
         $id = $args['id'];
         $singleTodo = $this->blog->getOne($id);
         return $response->withJson(['data' => $singleTodo]);
     });
 
+
+    $app->get('/entries/user/{id}', function ($request, $response, $args) {
+        
+        $id = $args['id'];
+        $singleTodo = $this->blog->getFromUser($id);
+        return $response->withJson(['data' => $singleTodo]);
+    });
+
     $app->post('/entry', function ($request, $response, $args) {
-        /**
-         * Everything sent in 'body' when doing a POST-request can be
-         * extracted with 'getParsedBody()' from the request-object
-         * https://www.slimframework.com/docs/v3/objects/request.html#the-request-body
-         */
+       
         $body = $request->getParsedBody();
         $newTodo = $this->blog->add($body);
         return $response->withJson(['data' => $newTodo]);
