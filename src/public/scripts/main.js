@@ -240,18 +240,18 @@ async function getEntriesFromUser(){
   }  
 }
 
-var getEntriesBtn = documment.getElementById("get-entries");
-getEntriesBtn.addEventListener("click", function(evt){
-  getEntriesFromUser();
-  evt.preventDefault();
+// var getEntriesBtn = documment.getElementById("get-entries");
+// getEntriesBtn.addEventListener("click", function(evt){
+//   getEntriesFromUser();
+//   evt.preventDefault();
 
-})
+// })
 
-var hiddeGetEnriesBtn = documment.getElementById("hiddeAll");
-hiddeGetEnriesBtn.addEventListener("click", function(evt){
-  evt.preventDefault();
+// var hiddeGetEnriesBtn = documment.getElementById("hiddeAll");
+// hiddeGetEnriesBtn.addEventListener("click", function(evt){
+//   evt.preventDefault();
 
-})
+// })
 
 
 
