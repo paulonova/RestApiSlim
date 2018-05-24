@@ -52,12 +52,12 @@ Skapa ett API med hjälp av PHP-ramverket Slim och databasen MySQL. Till detta A
 - [x] `GET` hämta en användare med ID (/api/users/{id})
 
 #### Comments
-- [x] `GET` senaste 20 comments (/api/commments) LIMIT=20 *
-- [x] `GET` specifik comment med ID (/api/comment/{id}) *
+- [x] `GET` senaste 20 comments (/api/commments) LIMIT=20 
+- [x] `GET` specifik comment med ID (/api/comment/{id}) 
 - [x] `GET` alla inlägg från en specifik user (/api/comments/{id})
-- [x] `GET` alla comments på en entry (/api/entries/user/{id}) *
-- [x] `POST` skapa en ny comment (/api/comments) *
-- [x] `DELETE` ta bort en comment (/api/comments/delete/{id}) *
+- [x] `GET` alla comments på en entry (/api/entries/user/{id}) 
+- [x] `POST` skapa en ny comment (/api/comments) 
+- [x] `DELETE` ta bort en comment (/api/comments/delete/{id}) 
 
 #### Other (outside /api)
 - [x] `POST` Login function
