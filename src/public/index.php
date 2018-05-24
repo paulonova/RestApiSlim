@@ -45,13 +45,13 @@ $app->get('/', function ($request, $response, $args) {
  */
 $app->group('/api', function () use ($app) {
 
-    // GET http://localhost:XXXX/api/todos
+    /** ********************************************************/
+    /** ********************ENTRIES ****************************/
     $app->get('/entries', function ($request, $response, $args) {
         $allEntries = $this->blog->getAll();
         return $response->withJson(['data' => $allEntries]);
     });
 
-    // GET http://localhost:XXXX/api/todos/5
     $app->get('/entries/{id}', function ($request, $response, $args) {
 
         $id = $args['id'];
@@ -74,7 +74,7 @@ $app->group('/api', function () use ($app) {
         return $response->withJson(['data' => $newTodo]);
     });
     
-    /**DELETE working ****************************************** */
+    /**DELETE ENTRY ****************************************** */
     $app->delete('/entry/{id}', function ($request, $response, $args) {       
 
         try{
@@ -87,7 +87,7 @@ $app->group('/api', function () use ($app) {
         }        
     });
 
-    /**UPDATE working ****************************************** */
+    /**UPDATE ENTRY ****************************************** */
     $app->patch('/entry/{id}', function($request, $response, $args){
 
         $body = $request->getParsedBody();
@@ -95,6 +95,9 @@ $app->group('/api', function () use ($app) {
         return $response->withJson(['data' => $updateEntry]);
     });
 
+
+    /** ********************************************************/
+    /** ******************** COMMENTS **************************/
 
     /**GET a single comment by ID ******************************** */
     $app->get('/comment/{id}', function ($request, $response, $args){
@@ -120,7 +123,7 @@ $app->group('/api', function () use ($app) {
         return $response->withJson(['data' => $allComments]);
     });
 
-    //POST
+    //Skapa kommentar
     $app->post('/comments', function ($request, $response, $args) {
     
         $body = $request->getParsedBody();

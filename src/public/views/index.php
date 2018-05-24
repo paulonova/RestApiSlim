@@ -64,8 +64,8 @@
 <?php endif ?>
 
 <header class="inlamning_title jumbotron">
-    <h1>Gruppuppgift - API</h1>    
-    <h3>Ett API med Slim and PDO</h3> 
+    <h1>Gruppuppgift - @appSolut</h1>    
+    <h3>Ett API med Slim och PDO</h3> 
     <div class="to_login_container">
         <a class="btn btn-primary" href="../views/login_view.php">Login Page</a>
         <a class="btn btn-warning" href='../logout.php'>Logout here</a>
@@ -74,7 +74,7 @@
 
 <?php if (isset($_SESSION["loggedIn"])): ?>
 
-    <h4 class="welcome_user">Welcome <?php echo $_SESSION["username"] . " ID: " . $_SESSION["user_id"]?></h4>
+    <h4 class="welcome_user">Välkomen <?php echo $_SESSION["username"] . " ID: " . $_SESSION["user_id"]?></h4>
     <hr>
     
     <div class="alert alert-success"> <!-- the green header -->
@@ -106,22 +106,22 @@
         </div>
         <hr>
         <!-- get all entries from a specific user -->
-        <h4 for="getFromUser">Hämta ut alla inlägg från en speecifik användare</h4>
+        <h4 for="getFromUser">Hämta ut alla inlägg från en specifik användare</h4>
         <input id="getFromUser" class="form-control" name="getFromUser" type="number" value="1" min="1">
-        <input id="get-entries" type="button" class="btn btn-success" value="get entries" >
-        <input id="hiddeGetEntries" type="button" class="btn btn-warning" value="Hidde all" >
+        <input id="getUserEntries" type="submit" class="btn btn-success" value="get entries" >
+        <input id="hiddeGetEntries" type="submit" class="btn btn-warning" value="Hidde all" >
         <br><br>
 
-        <div id="errorEntriesContainer" class="form-control"></div>
+        <div id="errorEntriesContainer" class="alert alert-danger hidden"></div>
 
-        <div id="getEntriesContainer" class="form-control">NEED TO FIX THIS..</div>
+        <div id="getEntriesContainer" class="form-control hidden"></div>
 
 
     </section> <!-- Show a single entry -->
     <hr>
 
     <!-- Show all Users -->
-    <h4 class="alert alert-warning">GET all users</h4>
+    <h4 class="alert alert-warning">Hämta alla användare</h4>
     <section class="user_container">
 
          <table class="table">
@@ -140,7 +140,7 @@
     <hr>
 
     <section class="jornal_form"> <!-- Section CREATE ENTRY -->
-        <h2 class="saved_articles">Create Entry</h2>
+        <h2 class="saved_articles">Infoga inlägg</h2>
         <form >
             <!-- Title -->
             <input id="entry_title" type="text" name ="entry_title" value= "" class="form-control" 
@@ -164,27 +164,27 @@
                          required autofocus/>  <!-- Date -->            
 
             <div class="signin_btn"> <!-- Save/update button -->
-                <input id="updateEntry" class="btn btn-warning" name="update" value="Update" type="submit">
-                <input id="saveEntry" class="btn btn-lg btn-primary" name="save" value="Save" type="submit"> 
+                <input id="updateEntry" class="btn btn-warning" name="update" value="Uppdatering" type="submit">
+                <input id="saveEntry" class="btn btn-lg btn-primary" name="save" value="Spara" type="submit"> 
             </div> <!-- Save/update button -->
             <hr>
 
             <!-- Save Comments -->
             <div class="form-group">
-                <label for="comm_area">Comment</label>
+                <label for="comm_area">Kommentar</label>
                 <!-- Comment -->
                 <textarea class="form-control" id="comment_area" rows="3"></textarea>
                 <!-- Entry id -->     
-                <input id="comm_entry_id" class="form-control" name="entry-id" placeholder="insert entry id"
+                <input id="comm_entry_id" class="form-control" name="entry-id" placeholder="Infoga inlägg id"
                                 type="number" value="" min="1" required autofocus>
                 <!-- Ceated  by -->     
-                <input id="comm_created_by" class="form-control" name="comm_created_by" placeholder="Created by"
+                <input id="comm_created_by" class="form-control" name="comm_created_by" placeholder="Skapad av"
                                 type="number" value="" min="1" required autofocus>
                 <!-- Created at -->
                 <input id="comm_created_at" type="date" class="form-control" name="created-at" 
                         value="" required autofocus/>  <!-- Date -->  
                 <div class="signin_btn"> <!-- Save/update button -->
-                    <input id="saveComment" class="btn btn-lg btn-primary" name="save" value="Save Comment" type="submit"> 
+                    <input id="saveComment" class="btn btn-lg btn-primary" name="save" value="Spara Komment" type="submit"> 
                 </div> <!-- Save Comments -->               
 
             </div>
@@ -254,7 +254,7 @@
     <hr>
 
     <!-- Show all Comments -->
-    <h4 class="alert alert-success">De 20 senaste commentarerna</h4>
+    <h4 class="alert alert-success">De 20 senaste Kommentarerna</h4>
     <section id="comment_container" class="comment-container"></section>
        
     <br>

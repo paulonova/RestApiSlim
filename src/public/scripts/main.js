@@ -17,6 +17,7 @@ function errorMessage(msg, element){
 
 /**Creating a CadView */
 function createElementCards(elementId, entryID, title, content, createdAt, createdBy){
+
     var entries_container = document.getElementById(elementId);
 
     //Containers
@@ -68,18 +69,21 @@ function createElementCards(elementId, entryID, title, content, createdAt, creat
     smallBy.appendChild(smallByText);
     a.appendChild(smallBy);
 
-    //Delete button
-    let delBtn = document.createElement("BUTTON");
-    delBtn.setAttribute("class", "btn btn-success");
-    delBtn.setAttribute("id", "entryDeleteBtn");
-    let delText = document.createTextNode("Delete");
-    delBtn.appendChild(delText);
-    a.appendChild(delBtn);
+    if(elementId != "getEntriesContainer"){
+        //Delete button
+        let delBtn = document.createElement("BUTTON");
+        delBtn.setAttribute("class", "btn btn-success");
+        delBtn.setAttribute("id", "entryDeleteBtn");
+        let delText = document.createTextNode("Delete");
+        delBtn.appendChild(delText);
+        a.appendChild(delBtn);
 
-    delBtn.addEventListener("click", function(evt){
-      deleteEntry(entryID);
-      evt.preventDefault();
-    });   
+        delBtn.addEventListener("click", function(evt){
+          deleteEntry(entryID);
+          evt.preventDefault();
+        });  
+
+    }     
 
 }
 
@@ -214,17 +218,19 @@ function createCommentsByCommentIDAndEntryID(element, commentId, entryId, commen
 /**GET ENTRIES FROM A USER ************************/
 async function getEntriesFromUser(){
   let getId = document.getElementById("getFromUser").value;
-  let url = "api/entris/user/" + getId;
+  let url = "api/entries/user/" + getId;
 
   const response = await fetch(url);
   const { data } = await response.json();
 
   if(data == ""){
     console.log("Is data: false");
-    // document.getElementById("set-comments").setAttribute("class", "hidden");
-    // document.getElementById("errorComment").removeAttribute("class", "hidden");
+    document.getElementById("getEntriesContainer").setAttribute("class", "hidden");
+    document.getElementById("errorEntriesContainer").removeAttribute("class", "hidden");
     errorMessage("No Comments with this commentID.", "errorEntriesContainer");
+
   }else{
+
     console.log("Is data: true");
     for (const resource  of data) {
       var date = resource .createdAt.split(" ");
@@ -240,18 +246,21 @@ async function getEntriesFromUser(){
   }  
 }
 
-// var getEntriesBtn = documment.getElementById("get-entries");
-// getEntriesBtn.addEventListener("click", function(evt){
-//   getEntriesFromUser();
-//   evt.preventDefault();
+var getEntriesBtn = document.getElementById("getUserEntries");
+getEntriesBtn.addEventListener("click", function(evt){
+  document.getElementById("getEntriesContainer").removeAttribute("class", "hidden");
+  getEntriesFromUser(); 
+  evt.preventDefault();
+  document.getElementById("getFromUser").value="";
 
-// })
+})
 
-// var hiddeGetEnriesBtn = documment.getElementById("hiddeAll");
-// hiddeGetEnriesBtn.addEventListener("click", function(evt){
-//   evt.preventDefault();
+var hiddeGetEnriesBtn = document.getElementById("hiddeGetEntries");
+hiddeGetEnriesBtn.addEventListener("click", function(evt){
+  evt.preventDefault();
+  window.location.reload(false);
 
-// })
+})
 
 
 
