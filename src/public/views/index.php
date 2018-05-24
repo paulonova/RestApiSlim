@@ -109,7 +109,7 @@
         <h4 for="getFromUser">Hämta ut alla inlägg från en speecifik användare</h4>
         <input id="getFromUser" class="form-control" name="getFromUser" type="number" value="1" min="1">
         <input id="get-entries" type="button" class="btn btn-success" value="get entries" >
-        <input id="hiddeAll" type="button" class="btn btn-warning" value="Hidde all" >
+        <input id="hiddeGetEntries" type="button" class="btn btn-warning" value="Hidde all" >
         <br><br>
 
         <div id="errorEntriesContainer" class="form-control"></div>
